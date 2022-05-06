@@ -7,3 +7,4 @@ A group project based on the game, Wordle.
 ## Group members
 
 * Njabulo Masilela 
+* Isaiah Chiraira
