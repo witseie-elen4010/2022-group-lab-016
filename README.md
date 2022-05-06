@@ -9,3 +9,4 @@ A group project based on the game, Wordle.
 * Njabulo Masilela 
 * Isaiah Chiraira
 * Tirivashe Maredza
+* Brian Nkundhlande
