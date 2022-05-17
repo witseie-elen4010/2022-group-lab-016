@@ -97,3 +97,20 @@ The following styles will be adopted for HTML
 - Validate code
 - Check code using multiple browsers
 - Keep code simple and succinct
+
+### CSS###
+
+The following styles will be adopted for CSS
+- Use soft tabs with two space
+- When grouping selectors, keep individual selectors to a single line.
+- Include one space before the opening brace of declaration blocks for legibility.
+- Place closing braces of declaration blocks on a new line.
+- Include one space after a colon for each declaration.
+- Each declaration should appear on its own line for more accurate error reporting.
+- End all declarations with a semi-colon.
+- Comma-separated property values should include a space after each comma
+- no spaces included  after commas within rgb(), rgba(), hsl(), hsla(), or rect() values.
+- Lowercase all hex values 
+- Use shorthand hex values where available
+- Quote attribute values in selectors
+
