@@ -70,4 +70,4 @@ The following styles will be adopted for Vanilla JavaScript
 - When line-wrapping, each line after the first is indented at least + 4 spaces from the original line. 
 - One statement is allowed per line, then followed by a line-break.
 - No space should be placed between a function name and the opening bracket when declaring or calling a function.
-- A single space indention should be placed between the closing round bracket and the curly bracket when desining a function, this applies to all other objects that uses curley brackets for scope definition.
+- A single space indention should be placed between the closing round bracket and the curly bracket when defining a function, this applies to all other objects that uses curley brackets for scope definition.
