@@ -26,3 +26,48 @@ The following styles will be adopted for MYSQL
 - Table names are to be different from any column name.
 - lowercase are to be used for column names.
 - Correlation name should be the first letter of each word in the object’s name.
+
+###VANILLA JAVASCRIPT##
+
+The following styles will be adopted for Vanilla JavaScript
+
+- Avoid declaring variables using the var keyword.
+- The 'usestrict' directive should be used for all JS files.
+- Modules should be used to separate concerns of different nature.
+- Declare variables using the constant keyword whenever possible.
+- Always use a semicolon at the end of each line
+- Use the K & R style for non empty blocks and block-like constructs.
+- Empty blocks can however be closed immediately  with no space or a line break in between the curly brackelt i.e. let do_nothing = function() {}
+- A function should be limited to 30 lines of code.
+- Variables should be named to provide information about its existance in the code.
+- Variable names should be limited to 30 characters.
+- Snakecase is used for declaring variables.
+- Single line comment is done strictly using (//) and for Multiple-lines the (/* */) style is used.
+- A string is defined using single quotes.
+- The length of the code should be limited to 80 characters.
+- Helper functions should come after the code that uses the functions.
+- File names should be lowercase and may only contain an underscore. 
+- Avoid hardcoded values.
+- Limit nested loops to three levels.
+- All variables are initialised immediately after declaration. 
+- Any object literal may optionally be  formatted as if it were like a block-construct i.e an array can be formated like a function  
+- Avoid block scoped functions.
+- All files should have a top-level file overview.
+- All global variables must be declared as constant variables and these should be uppercase i.e const GLOBAL = 0
+- All global variables appear before the code 
+- Functions and classes are declared using the Snakecase.
+- Use Arrow functions whenever possible.
+- Equality checks are done strictly using the (=== or !== ), unless used for catching null or undefined values.
+- All switch statements should end with a default case.
+- Contents of a switch statement are indented +2.
+- All cases of a switch statement should end with a break, return or a throw statement.
+- If a catch block of an exception is empty, a reason for that should be briefly discussed using a comment. 
+- Numbers are specified in decimal (base 10).
+- Avoid line continuations.
+- All lines of code defined within the same block should have the same indention. 
+- Avoid using a comma between the end bracket and the final element of an array i.e avoid: let array = [......'lastElement',].
+- Variables should be declared within the scope that they are used.
+- When line-wrapping, each line after the first is indented at least + 4 spaces from the original line. 
+- One statement is allowed per line, then followed by a line-break.
+- No space should be placed between a function name and the opening bracket when declaring or calling a function.
+- A single space indention should be placed between the closing round bracket and the curly bracket when desining a function, this applies to all other objects that uses curley brackets for scope definition.
