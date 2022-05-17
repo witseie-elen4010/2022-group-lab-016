@@ -35,7 +35,7 @@ The following styles will be adopted for Vanilla JavaScript
 - The 'usestrict' directive should be used for all JS files.
 - Modules should be used to separate concerns of different nature.
 - Declare variables using the constant keyword whenever possible.
-- Always use a semicolon at the end of each line
+- Always use a semicolon at the end of each line.
 - Use the K & R style for non empty blocks and block-like constructs.
 - Empty blocks can however be closed immediately  with no space or a line break in between the curly brackelt i.e. let do_nothing = function() {}
 - A function should be limited to 30 lines of code.
@@ -53,13 +53,13 @@ The following styles will be adopted for Vanilla JavaScript
 - Any object literal may optionally be  formatted as if it were like a block-construct i.e an array can be formated like a function  
 - Avoid block scoped functions.
 - All files should have a top-level file overview.
-- All global variables must be declared as constant variables and these should be uppercase i.e const GLOBAL = 0
-- All global variables appear before the code 
+- All global variables must be declared as constant variables and these should be uppercase i.e const GLOBAL = 0;
+- All global variables appear before the code .
 - Functions and classes are declared using the Snakecase.
 - Use Arrow functions whenever possible.
 - Equality checks are done strictly using the (=== or !== ), unless used for catching null or undefined values.
 - All switch statements should end with a default case.
-- Contents of a switch statement are indented +2.
+- Contents of a switch statement are indented +2 spaces.
 - All cases of a switch statement should end with a break, return or a throw statement.
 - If a catch block of an exception is empty, a reason for that should be briefly discussed using a comment. 
 - Numbers are specified in decimal (base 10).
@@ -70,4 +70,4 @@ The following styles will be adopted for Vanilla JavaScript
 - When line-wrapping, each line after the first is indented at least + 4 spaces from the original line. 
 - One statement is allowed per line, then followed by a line-break.
 - No space should be placed between a function name and the opening bracket when declaring or calling a function.
-- A single space indention should be placed between the closing round bracket and the curly bracket when defining a function, this applies to all other objects that uses curley brackets for scope definition.
+- A single space indention should be placed between the closing round bracket and the curly bracket when defining a function, this applies to all other objects that uses curly brackets for scope definition.
