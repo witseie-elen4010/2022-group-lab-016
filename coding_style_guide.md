@@ -29,7 +29,7 @@ The following styles will be adopted for MYSQL
 
 ###VANILLA JAVASCRIPT##
 
-The following styles will be adopted for Vanilla JavaScript
+The following styles will be adopted for Vanilla JavaScript (also applicable to Node.js)
 
 - Avoid declaring variables using the var keyword.
 - The 'usestrict' directive should be used for all JS files.
@@ -71,19 +71,3 @@ The following styles will be adopted for Vanilla JavaScript
 - One statement is allowed per line, then followed by a line-break.
 - No space should be placed between a function name and the opening bracket when declaring or calling a function.
 - A single space indention should be placed between the closing round bracket and the curly bracket when defining a function, this applies to all other objects that uses curly brackets for scope definition.
-
-###Node.js###
-
-The following styles will be adopted for Node.js
-
-- 2 speces for indentation.
-- Use UNIX-style newlines (\n). 
-- No trailing whitespaces.
-- 80 characters per line.
-- Use single quotes, unless when you are writing JSON.
-- Opening braces go on the same line as the statement.
-- Declare one variable per statement.
-- Use lowerCamelCase for variables, properties and function names.
-- Use UpperCamelCase for class names.
-- Use UPPERCASE for constants.
-- Do not extend built-in native JavaScript objects.
