@@ -29,7 +29,7 @@ The following styles will be adopted for MYSQL
 
 ###VANILLA JAVASCRIPT##
 
-The following styles will be adopted for Vanilla JavaScript
+The following styles will be adopted for Vanilla JavaScript (also applicable to Node.js)
 
 - Avoid declaring variables using the var keyword.
 - The 'usestrict' directive should be used for all JS files.
