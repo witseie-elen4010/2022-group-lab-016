@@ -71,3 +71,29 @@ The following styles will be adopted for Vanilla JavaScript
 - One statement is allowed per line, then followed by a line-break.
 - No space should be placed between a function name and the opening bracket when declaring or calling a function.
 - A single space indention should be placed between the closing round bracket and the curly bracket when defining a function, this applies to all other objects that uses curly brackets for scope definition.
+
+### HTML###
+
+The following styles will be adopted for HTML
+
+- Always declare the document type at the top of the code using <!DOCTYPE html>
+- Kepp structure (markup), presentation (styling), and behaviour (scripting) apart
+- Add lang, charset and attributes early in the document
+- Set the viewport meta tag
+- Use consistent naming styles
+- Surround each section of a page with opening and closing section elements
+- Provide alternative content for multimedia
+- For images, always specify alt, width, and height
+- Add a meaningful title element
+- Use elements for what they have been created for (HTML semantics)
+- Avoid using HTML elements to achieve specific visual results
+- Use lowercases for element and attribute names
+- Avoid using tabs, instead indent by two spaces per indentation level
+- Avoid unnecessary id attributes
+- Use double quotation marks to quote attributes
+- Avoid long code lines; except in metadata tags and URL links
+- Avoid unnecessary blank lines, spaces, and indentation, unless it is for separating large or logical code blocks
+- Use entities only where applicable
+- Validate code
+- Check code using multiple browsers
+- Keep code simple and succinct
