@@ -1,0 +1,4 @@
+body.signin-body {
+    background: url("/public/images/background.png") no-repeat center center fixed;
+    background-size: cover;
+}
