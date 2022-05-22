@@ -2,3 +2,38 @@ body.signin-body {
     background: url("/public/images/background.png") no-repeat center center fixed;
     background-size: cover;
 }
+
+
+.signin-text {
+    font-weight: bold;
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container.signin-container  {
+    margin-top:8%;
+}
+
+.card.signin-card {
+    padding: 20px 10px 5px;
+    background-color: rgba(239, 253, 235, 0.664);
+    border-radius: 10px;
+    box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
+    -webkit-box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
+    -moz-box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
+}
+
+form.signin-form {
+    max-width: 350px;
+    margin:auto;
+}
+
+.signin-btn {
+    width: 100%;
+    background-color: black;
+    color: white;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
