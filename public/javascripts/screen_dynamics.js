@@ -2,6 +2,8 @@
 
 let SCREEN_CURSOR = 0
 const BUTTON_LENGTH = 5
+let SUBMIT = false
+let DELETE = false
 
 const game_buttons = Array.from(document.getElementsByClassName('button'))
 
@@ -17,15 +19,24 @@ game_buttons.map(button => {
 
     switch (element) {
       case 'ENTER':
-
+          if (SCREEN_CURSOR % BUTTON_LENGTH === 0 && SCREEN_CURSOR !== 0) {
+              SUBMIT = true
+              SCREEN_CURSOR++
+         }
         break
       case 'DEL':
           get_element_function(SCREEN_CURSOR).innerText = '\xa0'
-          SCREEN_CURSOR--
+          if ((SCREEN_CURSOR - 1) % BUTTON_LENGTH !== 0) {
+             SCREEN_CURSOR--
+          } else DELETE = true
         break
       default:
-          SCREEN_CURSOR++
-          get_element_function(SCREEN_CURSOR).innerText = element
+        if (SCREEN_CURSOR % BUTTON_LENGTH !== 0 || SUBMIT === true || SCREEN_CURSOR === 0) {
+           if (!(DELETE || SUBMIT)) SCREEN_CURSOR++
+           get_element_function(SCREEN_CURSOR).innerText = element
+           SUBMIT = false
+           DELETE = false
+        }
         break
     }
   })
