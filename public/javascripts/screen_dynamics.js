@@ -20,7 +20,8 @@ game_buttons.map(button => {
 
         break
       case 'DEL':
-
+          get_element_function(SCREEN_CURSOR).innerText = '\xa0'
+          SCREEN_CURSOR--
         break
       default:
           SCREEN_CURSOR++
