@@ -4,6 +4,7 @@ let SCREEN_CURSOR = 0
 const BUTTON_LENGTH = 5
 let SUBMIT = false
 let DELETE = false
+const correctWord = 'BRIAN'
 
 const game_buttons = Array.from(document.getElementsByClassName('button'))
 
@@ -12,6 +13,25 @@ const get_element_function = function (value) {
   return document.getElementById(element)
 }
 
+const review_answer = function () {
+    let n = 0
+    for (let i = (SCREEN_CURSOR - 4); i <= SCREEN_CURSOR; i++) {
+      const element = get_element_function(i).innerText
+  
+      for (let k = 0; k < correctWord.length; k++) {
+        if (correctWord[k] === element && n === k) {
+          get_element_function(i).style.backgroundColor = 'rgba(106, 170, 100, 255)'
+          break
+        } else if (correctWord[k] === element) {
+          get_element_function(i).style.backgroundColor = 'rgba(201, 180, 88, 255)'
+          break
+        } else {
+          get_element_function(i).style.backgroundColor = 'rgba(120, 124, 126, 255)'
+        }
+      }
+      n++
+    }
+  }
 
 game_buttons.map(button => {
   button.addEventListener('click', (e) => {
@@ -20,8 +40,9 @@ game_buttons.map(button => {
     switch (element) {
       case 'ENTER':
           if (SCREEN_CURSOR % BUTTON_LENGTH === 0 && SCREEN_CURSOR !== 0) {
-              SUBMIT = true
-              SCREEN_CURSOR++
+            review_answer()  
+            SUBMIT = true
+            SCREEN_CURSOR++
          }
         break
       case 'DEL':
