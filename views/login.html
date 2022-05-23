@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,11 @@
     <title>Competitive Wordle Sign In</title>
 
     <!-- Bootstrap bundle -->
-    <link rel="stylesheet" 
-      href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="/javascripts/login.js"></script>
     <!-- link css stylesheet -->
-    <link rel="stylesheet" href="/public/stylesheets/login.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+
 </head>
 
 <body class="signin-body">
@@ -20,22 +22,24 @@
             <!-- Display the sign in card to be centered in the middle -->
             <div class="col-sm-12 col-md-8">
                 <div class="card signin-card">
-                <div class="card-block">
-                    
-                    <p class="signin-text"> Sign-in to your account</p>
-                    <form class="signin-form">
-                        <div class="form-group">
-                            <input type="email" id="email-signin" placeholder="Email Address" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="password-signin" placeholder="Password" class="form-control">
-                        </div>
-                        <button type="button" id="button-signin" class=" btn signin-btn btn-lg">Sign In</button>
-                        <a href="#">Forgot your password?</a>
-                        <p>Don't have an account? <a href="signup.html">Sign-up here</a></p>
-                    </form>
+                    <div class="card-block">
 
-                </div>
+                        <p class="signin-text"> Sign-in to your account</p>
+                        <form class="signin-form">
+                            <div class="form-group">
+                                <input type="email" id="email-signin" placeholder="Email Address" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password-signin" placeholder="Password" class="form-control">
+                            </div>
+                            <button type="button" id="button-signin" class=" btn signin-btn btn-lg">Sign In</button>
+                            <a href="#">Forgot your password?</a>
+                            <p>Don't have an account? <a href="signup">Sign-up here</a></p>
+                            <!--<input id="clickMe" type="button" value="clickme" onclick="move();" /> -->
+
+                        </form>
+
+                    </div>
                 </div>
             </div>
             <div class="col"></div>
@@ -44,4 +48,5 @@
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
+
 </html>

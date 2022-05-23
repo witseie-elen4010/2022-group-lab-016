@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Competitive Wordle Sign Up</title>
-    
-    <!-- Bootstrap bundle -->
-    <link rel="stylesheet" 
-      href="/node_modules/bootstrap/dist/css/bootstrap.css">
-    <!-- link css stylesheet-->
-    <link rel="stylesheet" href="/public/stylesheets/login.css">
-  </head>
 
-  <body class="signup-body">
+    <!-- Bootstrap bundle -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <!-- link css stylesheet-->
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+
+<body class="signup-body">
 
     <div class="container signup-container ">
         <div class="row">
@@ -22,30 +22,31 @@
             <!-- Display the sign up card to be centered in the middle -->
             <div class="col-sm-12 col-md-8">
                 <div class="card signup-card">
-                <div class="card-block">
-                    <h4 class="signup-text"> Create a new account</h4>
+                    <div class="card-block">
+                        <h4 class="signup-text"> Create a new account</h4>
 
-                    <form class="signup-form">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="surname" placeholder="Surname" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email-signup" placeholder="Email-Address" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="password-signup" placeholder="Password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="cfm-password-signup" placeholder="Confirm Password" class="form-control">
-                        </div>
-                        <button type="button" id="button-signup" class=" btn signup-btn btn-lg">Sign Up</button>
-                        <p>Already have an account? <a href="login.html">Sign-in here</a></p>
-                    </form>
+                        <form class="signup-form">
+                            <div class="form-group">
+                                <input type="text" id="name" placeholder="Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="surname" placeholder="Surname" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email-signup" placeholder="Email-Address" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password-signup" placeholder="Password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="cfm-password-signup" placeholder="Confirm Password"
+                                    class="form-control">
+                            </div>
+                            <button type="button" id="button-signup" class=" btn signup-btn btn-lg">Sign Up</button>
+                            <p>Already have an account? <a href="/login">Sign-in here</a></p>
+                        </form>
 
-                </div>
+                    </div>
                 </div>
             </div>
             <div class="col"></div>
@@ -55,5 +56,6 @@
     <!--Bootstrap Bundle with Popper -->
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 
-  </body>
+</body>
+
 </html>

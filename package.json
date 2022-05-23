@@ -4,7 +4,8 @@
   "description": "A group project based on the game, Wordle.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,9 @@
   "homepage": "https://github.com/witseie-elen4010/2022-group-lab-016#readme",
   "dependencies": {
     "bootstrap": "^5.1.3",
-    "express": "4.18.1"
+    "dotenv": "^16.0.1",
+    "express": "4.18.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.16"
   }
 }

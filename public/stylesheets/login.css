@@ -4,13 +4,15 @@
     box-sizing: border-box;
 }
 
-body.signin-body, body.signup-body {
-    background: url("/public/images/background.png") no-repeat center center fixed;
+body.signin-body,
+body.signup-body {
+    background: url("/images/background.png") no-repeat center center fixed;
     background-size: cover;
 }
 
 
-.signin-text, .signup-text{
+.signin-text,
+.signup-text {
     font-weight: bold;
     font-size: 30px;
     display: block;
@@ -18,11 +20,13 @@ body.signin-body, body.signup-body {
     margin-bottom: 20px;
 }
 
-.container.signin-container, .container.signup-container {
-    margin-top:8%;
+.container.signin-container,
+.container.signup-container {
+    margin-top: 8%;
 }
 
-.card.signin-card, .card.signup-card {
+.card.signin-card,
+.card.signup-card {
     padding: 20px 10px 5px;
     background-color: rgba(239, 253, 235, 0.664);
     border-radius: 10px;
@@ -31,12 +35,14 @@ body.signin-body, body.signup-body {
     -moz-box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
 }
 
-form.signin-form, form.signup-form {
+form.signin-form,
+form.signup-form {
     max-width: 350px;
-    margin:auto;
+    margin: auto;
 }
 
-.signin-btn, .signup-btn {
+.signin-btn,
+.signup-btn {
     width: 100%;
     background-color: black;
     color: white;
@@ -44,7 +50,8 @@ form.signin-form, form.signup-form {
     margin-bottom: 1.2rem;
 }
 
-.signin-btn:hover, .signup-btn:hover {
+.signin-btn:hover,
+.signup-btn:hover {
     background-color: green;
     color: black;
 }
