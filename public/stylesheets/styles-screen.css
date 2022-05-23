@@ -81,3 +81,7 @@ header {
   user-select: none;
   border-radius:5px;
 }
+
+.keyboard-row button:hover{
+  background-color: grey; 
+}
