@@ -15,7 +15,8 @@ const get_element_function = function (value) {
 
 const review_answer = function () {
     let n = 0
-    for (let i = (SCREEN_CURSOR - 4); i <= SCREEN_CURSOR; i++) {
+    const startReviewPos = SCREEN_CURSOR - (BUTTON_LENGTH - 1)
+    for (let i = startReviewPos; i <= SCREEN_CURSOR; i++) {
       const element = get_element_function(i).innerText
   
       for (let k = 0; k < correctWord.length; k++) {
