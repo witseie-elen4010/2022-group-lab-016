@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Wordle Sign In</title>
+
+  <!-- Bootstrap bundle -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="../public/javascripts/signin.js"></script>
+  <script defer src="/javascripts/signin.js"></script>
+  <!-- link css stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/login.css">
+
+</head>
+
+<body class="signin-body">
+  <div class="container signin-container ">
+    <div class="row">
+      <div class="col"></div>
+      <!-- Display the sign in card to be centered in the middle -->
+      <div class="col-sm-12 col-md-8">
+        <div class="card signin-card">
+          <div class="card-block">
+
+            <p class="signin-text"> Sign-in to your account</p>
+
+            <!-- <form id="login">
+              <input type="text" autocomplete="off" id="username" placeholder="Username" />
+              <input type="password" autocomplete="off" id="password" placeholder="Password" />
+              <input type="submit" value="Submit Form" />
+            </form> -->
+
+            <form id="reg-form">
+
+              <div class="form-group">
+                <input type="text" autocomplete="off" id="username" placeholder="Username" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <input type="password" autocomplete="off" id="password" placeholder="Password" class="form-control" />
+              </div>
+
+
+              <!-- <input type="submit" value="Submit Form" /> -->
+              <button type="submit" id="button-signup" class=" btn signin-btn btn-lg">Sign In</button>
+              <p>Don't have an account? <a href="/signup">Sign Up here</a></p>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+
+</body>
+
+</html>

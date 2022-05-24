@@ -43,7 +43,40 @@ app.get('/screen', (req, res) => {
   res.sendFile(index);
 });
 
+//Login
+app.use(express.static(__dirname + '/public'));
+app.get('/signin', (req, res) => {
+  const index = path.join(__dirname, 'views', 'signin.html');
+  res.sendFile(index);
+});
 
+
+//login
+app.use(express.static(__dirname + '/public'));
+app.post('/signin', async (req, res) => {
+  const { username, password } = req.body
+  const user = await User.findOne({ username }).lean()
+
+  if (!user) {
+    return res.json({ status: 'error', error: 'Invalid username/password' })
+  }
+
+  if (await bcrypt.compare(password, user.password)) {
+    // the username, password combination is successful
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        username: user.username
+      },
+      JWT_SECRET
+    )
+
+    return res.json({ status: 'ok', data: token })
+  }
+
+  res.json({ status: 'error', error: 'Invalid username/password' })
+})
 
 //SignUp
 app.use(express.static(__dirname + '/public'));
