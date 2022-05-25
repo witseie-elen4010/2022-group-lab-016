@@ -1,0 +1,17 @@
+{
+  "name": "scr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.1.3",
+    "express": "^4.18.1",
+    "jest": "^28.1.0"
+  }
+}
