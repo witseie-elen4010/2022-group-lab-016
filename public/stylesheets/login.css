@@ -31,7 +31,7 @@ body {
     -moz-box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
 }
 
-form.reg-form {
+#reg-form {
     max-width: 350px;
     margin: auto;
 }
