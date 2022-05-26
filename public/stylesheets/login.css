@@ -5,7 +5,7 @@
 }
 
 body{
-    background: url("/src/public/images/background.png") no-repeat center center fixed;
+    background: url("/public/images/background.png") no-repeat center center fixed;
     background-size: cover;
 }
 
