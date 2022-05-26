@@ -19,7 +19,7 @@ mongoose.connect('mongodb+srv://Tadiwa:test123@cluster0.vlabe.mongodb.net/Cluste
 })
 
   .then(() => {
-    console.log('connected to db')
+    console.log('connected to wits.ac.za database')
   })
   .catch((err) => {
     console.log(err)
