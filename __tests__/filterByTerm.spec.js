@@ -1,4 +1,11 @@
 /* eslint-env jest */
+Signup-page
+const db = require('./db')
+
+beforeAll(async () => await db.connect())
+afterEach(async () => await db.clearDatabase())
+afterAll(async () => await db.closeDatabase())
+
 
 describe("Filter function", () => {
     test("it should filter by a search term (link)", () => {
@@ -22,3 +29,4 @@ describe("Filter function", () => {
       return arrayElement.url.match(regex);
     });
   }
+
