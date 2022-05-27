@@ -52,8 +52,11 @@
     min-height: 60px;
     font-size: 2rem;
     font-weight: bold;
+
+
     color: white;
     text-align: center;
+
   }
   
   #keyboard{
@@ -82,8 +85,10 @@
     margin-right: 3px;
     user-select: none;
     border-radius:5px;
+
   }
 
   .keyboard-row button:hover{
     background-color: grey; 
+
   }

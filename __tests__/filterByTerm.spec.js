@@ -1,10 +1,13 @@
 /* eslint-env jest */
-Signup-page
+
+
+
 const db = require('./db')
 
 beforeAll(async () => await db.connect())
 afterEach(async () => await db.clearDatabase())
 afterAll(async () => await db.closeDatabase())
+
 
 
 describe("Filter function", () => {
@@ -28,5 +31,9 @@ describe("Filter function", () => {
     return inputArr.filter(function(arrayElement) {
       return arrayElement.url.match(regex);
     });
+
   }
+
+  }
+
 

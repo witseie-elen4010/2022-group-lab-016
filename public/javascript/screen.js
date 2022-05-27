@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const numberOfGridEntries = 30
   createSquares()
@@ -12,3 +14,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 })
+
