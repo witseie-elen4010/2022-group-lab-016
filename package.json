@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,9 +14,13 @@
     "bootstrap": "^5.1.3",
     "express": "^4.18.1",
     "jest": "^28.1.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.4",
+    "nodemon": "^2.0.16"
   }
-
 }
-
-}
-

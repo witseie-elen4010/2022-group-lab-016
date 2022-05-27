@@ -1,50 +1,97 @@
 const express = require('express')
 const app = express()
-const path = require('path')
+const path = require('path');
 const port = 5000
 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-app.use(express.static(__dirname + '/models'))
+app.use(express.static(__dirname + '/models'));
 const User = require('./models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
-mongoose.connect('mongodb+srv://Tadiwa:test123@cluster0.vlabe.mongodb.net/Cluster0?retryWrites=true&w=majority', {
+mongoose.connect("mongodb+srv://Tadiwa:test123@cluster0.vlabe.mongodb.net/Cluster0?retryWrites=true&w=majority", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 
 })
 
   .then(() => {
-    console.log('connected to wits.ac.za database')
+    console.log("connected to db")
   })
   .catch((err) => {
     console.log(err)
-  })
+  });
 
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.json())
+
+
 
 app.get('/', (request, response) => {
   return response.send('Hello devs, this is our root endpoint')
 })
 
+//instructions
+//Login
+app.use(express.static(__dirname + '/public'));
+app.get('/instructions', (req, res) => {
+  const index = path.join(__dirname, 'views', 'instructions.html');
+  res.sendFile(index);
+});
+
+//screen
+app.use(express.static(__dirname + '/public'));
+app.get('/screen', (req, res) => {
+  const index = path.join(__dirname, 'views', 'screen.html');
+  res.sendFile(index);
+});
+
+//Login
+app.use(express.static(__dirname + '/public'));
+app.get('/signin', (req, res) => {
+  const index = path.join(__dirname, 'views', 'signin.html');
+  res.sendFile(index);
+});
 
 
+//login
+app.use(express.static(__dirname + '/public'));
+app.post('/signin', async (req, res) => {
+  const { username, password } = req.body
+  const user = await User.findOne({ username }).lean()
 
+  if (!user) {
+    return res.json({ status: 'error', error: 'Invalid username/password' })
+  }
 
+  if (await bcrypt.compare(password, user.password)) {
+    // the username, password combination is successful
 
-// SignUp
-app.use(express.static(__dirname + '/public'))
-app.get('/signup', (req, res) => {
-  const index = path.join(__dirname, 'views', 'signup.html')
-  res.sendFile(index)
+    const token = jwt.sign(
+      {
+        id: user._id,
+        username: user.username
+      },
+      JWT_SECRET
+    )
+
+    return res.json({ status: 'ok', data: token })
+  }
+
+  res.json({ status: 'error', error: 'Invalid username/password' })
 })
 
-app.use(express.static(__dirname + '/public'))
+//SignUp
+app.use(express.static(__dirname + '/public'));
+app.get('/signup', (req, res) => {
+  const index = path.join(__dirname, 'views', 'signup.html');
+  res.sendFile(index);
+});
+
+app.use(express.static(__dirname + '/public'));
 app.post('/signup', async (req, res) => {
   const { username, password: plainTextPassword } = req.body
 
@@ -81,6 +128,7 @@ app.post('/signup', async (req, res) => {
 
   res.json({ status: 'ok' })
 })
+
 
 app.listen(port, () => {
   console.log('App working fine')
