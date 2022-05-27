@@ -2,7 +2,7 @@
   "name": "scr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "jest",
     "start": "nodemon app.js"
