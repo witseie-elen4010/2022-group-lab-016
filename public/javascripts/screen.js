@@ -1,12 +1,9 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
-  const numberOfGridEntries = 30
   createSquares()
-  function createSquares () {
+  function createSquares() {
     const gameBoard = document.getElementById('checkerboard')
 
-    for (let i = 0; i < numberOfGridEntries; i++) {
+    for (let i = 0; i < 30; i++) {
       const square = document.createElement('div')
       square.classList.add('square')
       square.setAttribute('id', i + 1)
@@ -15,3 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
+describe('Sample Test', () => {
+  it('should test that true === true', () => {
+    expect(true).toBe(true)
+  })
+})
