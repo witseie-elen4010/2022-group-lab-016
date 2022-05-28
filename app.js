@@ -25,6 +25,7 @@ mongoose.connect("mongodb+srv://Tadiwa:test123@cluster0.vlabe.mongodb.net/Cluste
     console.log(err)
   });
 
+/*
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.json())
 
@@ -33,14 +34,10 @@ app.use(bodyParser.json())
 app.get('/', (request, response) => {
   return response.send('Hello devs, this is our root endpoint')
 })
+*/
 
 //instructions
 //Login
-app.use(express.static(__dirname + '/public'));
-app.get('/instructions', (req, res) => {
-  const index = path.join(__dirname, 'views', 'instructions.html');
-  res.sendFile(index);
-});
 
 //screen
 app.use(express.static(__dirname + '/public'));
@@ -51,7 +48,7 @@ app.get('/screen', (req, res) => {
 
 //Login
 app.use(express.static(__dirname + '/public'));
-app.get('/signin', (req, res) => {
+app.get('/', (req, res) => {
   const index = path.join(__dirname, 'views', 'signin.html');
   res.sendFile(index);
 });
@@ -59,7 +56,7 @@ app.get('/signin', (req, res) => {
 
 //login
 app.use(express.static(__dirname + '/public'));
-app.post('/signin', async (req, res) => {
+app.post('/', async (req, res) => {
   const { username, password } = req.body
   const user = await User.findOne({ username }).lean()
 
