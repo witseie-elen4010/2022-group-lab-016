@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path');
-const port = process.env.PORT || 3000 
+const port = process.env.PORT || 3000
 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -25,16 +25,16 @@ mongoose.connect("mongodb+srv://Tadiwa:test123@cluster0.vlabe.mongodb.net/Cluste
     console.log(err)
   });
 
-/*
+
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.json())
 
 
 
-app.get('/', (request, response) => {
-  return response.send('Hello devs, this is our root endpoint')
-})
-*/
+// app.get('/', (request, response) => {
+//   return response.send('Hello devs, this is our root endpoint')
+// })
+
 
 //instructions
 //Login
