@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path');
-const port = 5000
+const port = process.env.PORT || 3000 
 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -128,5 +128,5 @@ app.post('/signup', async (req, res) => {
 
 
 app.listen(port, () => {
-  console.log('App working fine')
+  console.log('Express server running on port', port)
 })
