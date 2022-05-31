@@ -56,7 +56,12 @@
     border-radius:5px;
 
   }
-  
+
+  .keyboard-row button:hover {
+    background-color: gray;
+  }
+
+
   #main-content {
     margin-left : auto;
     margin-right : auto;
