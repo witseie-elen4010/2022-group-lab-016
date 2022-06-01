@@ -37,7 +37,12 @@ app.use(bodyParser.json())
 
 
 //instructions
-//Login
+//Reset password
+app.use(express.static(__dirname + '/public'));
+app.get('/verify_user', (req, res) => {
+  const index = path.join(__dirname, 'views', 'verify_user.html');
+  res.sendFile(index);
+});
 
 //screen
 app.use(express.static(__dirname + '/public'));
