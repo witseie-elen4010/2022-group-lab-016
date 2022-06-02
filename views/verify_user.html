@@ -12,7 +12,8 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- Add styling for sign ip -->
   <link rel="stylesheet" href="/stylesheets/passwordreset.css">
-
+  <script src="../public/javascripts/verify_user.js"></script>
+  <script defer src="/javascripts/verify_user.js"></script>
 </head>
 
 <body>
@@ -29,8 +30,12 @@
 
               <div class="form-group">
                 <label for="userinfo">Enter your userinfo so that we can verify your account</label>
-                <input type="text" autocomplete="off" id="userinfo" placeholder="Username" class="form-control" /></label>
+                <input type="text" autocomplete="off" id="username" placeholder="Username"
+                  class="form-control" /></label>
               </div>
+              <!-- <div class="form-group">
+                <input type="password" autocomplete="off" id="password" placeholder="Password" class="form-control" />
+              </div> -->
 
               <button type="submit" id="button-resetuserinfo" class=" btn userinfo-btn btn-lg"> verify </button>
               <a href="/">Login instead</a>

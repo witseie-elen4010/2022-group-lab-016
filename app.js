@@ -144,6 +144,41 @@ app.listen(port, () => {
   console.log('Express server running on port', port)
 })
 
+// verify user 
+
+app.use(express.static(__dirname + '/public'));
+app.get('/verify_user', (req, res) => {
+  const index = path.join(__dirname, 'views', 'verify_user.html');
+  res.sendFile(index);
+});
+
+app.use(express.static(__dirname + '/public'));
+app.post('/verify_user', async (req, res) => {
+  const { username } = req.body
+  const user = await User.findOne({ username }).lean()
+
+  if (!user) {
+    return res.json({ status: 'error', error: 'username does not exist' })
+  }
+
+  if (await username == user.username) {
+    // the username, password combination is successful
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        username: user.username
+      },
+      JWT_SECRET
+    )
+
+    return res.json({ status: 'ok', data: token })
+  }
+
+  res.json({ status: 'error', error: 'username does not exist' })
+})
+
+
 //ResetPassword
 app.use(express.static(__dirname + '/public'));
 app.post('/reset_password', async (req, res) => {
