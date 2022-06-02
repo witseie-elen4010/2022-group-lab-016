@@ -1,19 +1,19 @@
-const form = document.getElementById('signin-form')
+const form = document.getElementById('userinfo-form')
 form.addEventListener('submit', login)
 
 async function login(event) {
   event.preventDefault()
   const username = document.getElementById('username').value
-  const password = document.getElementById('password').value
+  //const password = document.getElementById('password').value
 
-  const result = await fetch('/', {
+  const result = await fetch('/verify_user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      username,
-      password
+      username
+      //password
     })
   }).then((res) => res.json())
 
@@ -21,17 +21,8 @@ async function login(event) {
     // everythign went fine
     console.log('Got the token: ', result.data)
     localStorage.setItem('token', result.data)
-    window.location.href = "/screen";
+    window.location.replace("reset_password");
   } else {
     alert(result.error)
   }
-}
-
-if (window.history && history.pushState) {
-  addEventListener('load', function () {
-    history.pushState(null, null, null);
-    addEventListener('popstate', function () {
-      history.pushState(null, null, null);
-    });
-  });
 }

@@ -47,7 +47,7 @@
     padding: 15px;
     height: 58px;
     cursor: pointer;
-    background-color: gray;
+    background-color: lightgray;
     color: white;
     flex-grow: 1;
     text-transform: uppercase;
@@ -56,6 +56,11 @@
     border-radius:5px;
 
   }
+
+  .keyboard-row button:hover {
+    background-color: gray;
+  }
+
 
   #main-content {
     margin-left : auto;
@@ -81,4 +86,21 @@
 
 #U_back {
     background-color: #9E9E9E;
+}
+
+#popMessage{
+  border: 2px solid rgb(124, 124, 131);
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  color: black;
+  text-align: center;
+  margin-top: 10%;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#pop_message{
+  position: fixed;
+  left: 41%;
 }
