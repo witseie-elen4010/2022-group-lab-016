@@ -10,7 +10,7 @@ const get_element_function = function (value) {
   return document.getElementById(element);
 }
 
-let monitorKeyPressed = function(element){
+let monitorKeyPressed = function (element) {
 
   switch (element) {
     case 'ENTER':
@@ -19,38 +19,55 @@ let monitorKeyPressed = function(element){
     case 'DEL':
       // allow the user to delete some elements
       get_element_function(SCREEN_CURSOR).innerText = '\xa0';
-       if (SCREEN_CURSOR > 0) {
-           SCREEN_CURSOR--;
-       } 
+      if (SCREEN_CURSOR > 0) {
+        SCREEN_CURSOR--;
+      }
       break
     default:
       // enter characters on the screen 
-      if (SCREEN_CURSOR <  30) {
+      if (SCREEN_CURSOR < 30) {
         SCREEN_CURSOR++;
         get_element_function(SCREEN_CURSOR).innerText = element;
-     }
+      }
       break
   }
 }
 
 game_buttons.map(button => {
   button.addEventListener('click', (e) => {
-   const element = e.target.innerText;
-   monitorKeyPressed(element);
+    const element = e.target.innerText;
+    monitorKeyPressed(element);
   })
 })
 
-let getButton = function(element){
-  if(element === 'Backspace') element = 'DEL';
+let getButton = function (element) {
+  if (element === 'Backspace') element = 'DEL';
 
   element = element.toUpperCase();
-  game_buttons.forEach( function(button){
-     const keyboard_element = button.name.toUpperCase();
-     if(element === keyboard_element){
-        monitorKeyPressed(element);
-     }
+  game_buttons.forEach(function (button) {
+    const keyboard_element = button.name.toUpperCase();
+    if (element === keyboard_element) {
+      monitorKeyPressed(element);
+    }
   })
 }
-document.addEventListener('keydown', function(event){
+document.addEventListener('keydown', function (event) {
   getButton(event.key);
 })
+
+function changeHashOnLoad() {
+  window.location.href += "#";
+  setTimeout("changeHashAgain()", "50");
+}
+
+function changeHashAgain() {
+  window.location.href += "1";
+}
+
+var storedHash = window.location.hash;
+window.setInterval(function () {
+  if (window.location.hash != storedHash) {
+    window.location.hash = storedHash;
+  }
+}, 50);
+

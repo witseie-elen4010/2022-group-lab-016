@@ -26,3 +26,12 @@ async function login(event) {
     alert(result.error)
   }
 }
+
+if (window.history && history.pushState) {
+  addEventListener('load', function () {
+    history.pushState(null, null, null);
+    addEventListener('popstate', function () {
+      history.pushState(null, null, null);
+    });
+  });
+}
