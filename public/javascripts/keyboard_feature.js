@@ -9,6 +9,27 @@ const BUTTONS = [];
 const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
 const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
 const game_buttons = Array.from(document.getElementsByClassName('button'));
+const GUESSES = 6;
+let guesses_left = GUESSES;
+let game_over = false;
+
+//toastr
+toastr.options = {
+  "closeButton": true,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-bottom-full-width",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "9000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 
 const get_element_function = function (value) {
   const element = String(value);
@@ -18,9 +39,10 @@ const get_element_function = function (value) {
 const review_answer = function () {
   let n = 0;
   let correct_word = correctWord;
+  let guess_word = '';
   for (let i = (SCREEN_CURSOR - (BUTTON_LENGTH - 1)); i <= SCREEN_CURSOR; i++) {
     const element = get_element_function(i).innerText;
-
+    guess_word += element; 
     for (let k = 0; k < correct_word.length; k++) {
       if (correct_word[k] === element && n === k) {
       
@@ -44,6 +66,21 @@ const review_answer = function () {
     }
     n++;
   }
+  // Winning or losing game
+  if (guess_word === correctWord) {
+    toastr.success("You guessed Correctly! Game Over!");
+    game_over = true;
+    return;
+  } else{
+    guesses_left--;
+    if (guesses_left === 0){
+      toastr.error("You're out of guesses! Game Over!");
+      game_over = true;
+      return
+    }
+  }
+  
+  
 }
 
 let prompt_user = function(){
@@ -116,4 +153,9 @@ let getButton = function(element){
 }
 document.addEventListener('keydown', function(event){
   getButton(event.key);
+})
+//to help with handling when game is over
+document.addEventListener('keyup',(e)=>{
+  if (game_over) return ;
+
 })
