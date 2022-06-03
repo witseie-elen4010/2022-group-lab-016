@@ -57,6 +57,9 @@ const review_answer = function () {
         BUTTONS[n].style.backgroundColor = 'rgba(201, 180, 88, 255)';
         correct_word = correct_word.slice(0, k) +' '+ correct_word.slice(k + 1 , correct_word.length);
 
+
+let monitorKeyPressed = function (element) {
+
         break;
       } else {
 
@@ -97,6 +100,7 @@ let prompt_user = function(){
 
 let monitorKeyPressed = function(element, button){
 
+
   switch (element) {
     case 'ENTER':
       // allow the user to submit guesses
@@ -113,6 +117,7 @@ let monitorKeyPressed = function(element, button){
     case 'DEL':
       // allow the user to delete some elements
       get_element_function(SCREEN_CURSOR).innerText = '\xa0';
+
        if ((SCREEN_CURSOR - 1) % BUTTON_LENGTH !== 0) {
            SCREEN_CURSOR--;
        } else{
@@ -129,33 +134,36 @@ let monitorKeyPressed = function(element, button){
         SUBMIT = false;
         DELETE = false;
      }
+
       break
   }
 }
 
 game_buttons.map(button => {
   button.addEventListener('click', (e) => {
+
    const element = e.target.innerText;
    monitorKeyPressed(element, button);
+
   })
 })
 
-let getButton = function(element){
-  if(element === 'Backspace') element = 'DEL';
+let getButton = function (element) {
+  if (element === 'Backspace') element = 'DEL';
 
   element = element.toUpperCase();
+
   game_buttons.forEach( function(button){
      const keyboard_element = button.name.toUpperCase();
      if(element === keyboard_element){
         monitorKeyPressed(element, button);
      }
+
   })
 }
-document.addEventListener('keydown', function(event){
+document.addEventListener('keydown', function (event) {
   getButton(event.key);
-})
-//to help with handling when game is over
-document.addEventListener('keyup',(e)=>{
-  if (game_over) return ;
+});
 
-})
+
+
