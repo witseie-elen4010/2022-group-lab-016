@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wordle</title>
 
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="/javascripts/screen.js"></script>
 
   <script defer src="/javascripts/keyboard_feature.js"></script>
@@ -16,6 +16,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/styles-screen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
 
 </head>
@@ -53,61 +54,61 @@
   <div class="modal fade" id="InstructionsModal" tabindex="-1" aria-labelledby="InstructionsModalLabel"
     aria-hidden="false">
     <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content bg-black align-self-center w-75  align-items-center pt-5" id="main-content"">
-            <div class=" modal-header bg-black fw-bold fs-5" id="primary_color">
-        <p class="m-auto">HOW TO PLAY</p>
-        <button type="button" class="btn-close" id="Icon" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body bg-black" id="primary_color">
-        <p>Guess the <span class="fw-bold">WORDLE</span> in six tries.</p>
+      <div class="modal-content bg-black align-self-center w-75  align-items-center pt-5" id="main-content">
+        <div class=" modal-header bg-black fw-bold fs-5" id="primary_color">
+          <p class="m-auto">HOW TO PLAY</p>
+          <button type="button" class="btn-close" id="Icon" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body bg-black" id="primary_color">
+          <p>Guess the <span class="fw-bold">WORDLE</span> in six tries.</p>
 
-        <p class="py-0 my-1">Each guess must be a valid five-letter word. Hit the enter button to submit.</p>
+          <p class="py-0 my-1">Each guess must be a valid five-letter word. Hit the enter button to submit.</p>
 
-        <p class="py-0">After each guess, the color of the tiles will changes to show how close your guess was to the
-          word.</p>
+          <p class="py-0">After each guess, the color of the tiles will changes to show how close your guess was to the
+            word.</p>
 
-        <hr>
+          <hr>
 
-        <p class="fw-bold">Examples</p>
+          <p class="fw-bold">Examples</p>
 
-        <p class="fs-1 fw-bold">
-          <span id="W_back" class="border border-secondary px-2">W</span>
-          <span class="border border-secondary px-3">E</span>
-          <span class="border border-secondary px-3">A</span>
-          <span class="border border-secondary px-3">R</span>
-          <span class="border border-secondary px-3">Y</span>
-        </p>
+          <p class="fs-1 fw-bold">
+            <span id="W_back" class="border border-secondary px-2">W</span>
+            <span class="border border-secondary px-3">E</span>
+            <span class="border border-secondary px-3">A</span>
+            <span class="border border-secondary px-3">R</span>
+            <span class="border border-secondary px-3">Y</span>
+          </p>
 
-        <p>The letter <span class="fw-bold">W</span> is in the word and in the correct spot.</p>
+          <p>The letter <span class="fw-bold">W</span> is in the word and in the correct spot.</p>
 
-        <p class="fs-1 fw-bold">
-          <span class="border border-secondary px-3">P</span>
-          <span id="I_back" class="border border-secondary px-4">I</span>
-          <span class="border border-secondary px-3">L</span>
-          <span class="border border-secondary px-3">L</span>
-          <span class="border border-secondary px-3">S</span>
-        </p>
+          <p class="fs-1 fw-bold">
+            <span class="border border-secondary px-3">P</span>
+            <span id="I_back" class="border border-secondary px-4">I</span>
+            <span class="border border-secondary px-3">L</span>
+            <span class="border border-secondary px-3">L</span>
+            <span class="border border-secondary px-3">S</span>
+          </p>
 
-        <p>The letter <span class="fw-bold">I</span> is in the word but in the wrong spot.</p>
+          <p>The letter <span class="fw-bold">I</span> is in the word but in the wrong spot.</p>
 
-        <p class="fs-1 fw-bold">
-          <span class="border border-secondary px-3">V</span>
-          <span class="border border-secondary px-3">A</span>
-          <span class="border border-secondary px-3">G</span>
-          <span id="U_back" class="border border-secondary px-3 ">U</span>
-          <span class="border border-secondary px-3">E</span>
-        </p>
+          <p class="fs-1 fw-bold">
+            <span class="border border-secondary px-3">V</span>
+            <span class="border border-secondary px-3">A</span>
+            <span class="border border-secondary px-3">G</span>
+            <span id="U_back" class="border border-secondary px-3 ">U</span>
+            <span class="border border-secondary px-3">E</span>
+          </p>
 
-        <p>The letter <span class="fw-bold">U</span> is not in the word in any spot.</p>
+          <p>The letter <span class="fw-bold">U</span> is not in the word in any spot.</p>
 
-        <hr>
+          <hr>
 
-        <section class="fw-bold">
-          <p>A new WORDLE will be available each day on the single player mode!</p>
-        </section>
+          <section class="fw-bold">
+            <p>A new WORDLE will be available each day on the single player mode!</p>
+          </section>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
 
@@ -159,6 +160,7 @@
   <main class="align-self-center w-50 d-flex flex-column align-items-center pt-5" id="main-content">
     <div id="board-container"></div>
     <div class="pb-3" id="checkerboard"></div>
+
     <div class="pt-4" id="keyboard">
       <div class="keyboard-row">
 
@@ -173,6 +175,7 @@
         <button class="button" name="o">o</button>
         <button class="button" name="p">p</button>
       </div>
+
       <div class="keyboard-row">
         <div class="spacer-half"></div>
         <button class="button" name="a">a</button>
@@ -198,12 +201,22 @@
         <button class="button" name="del" id="wide-button">Del</button>
       </div>
     </div>
+
+
+    <form action="/signin">
+      <input type="submit" value="logout" />
+    </form>
   </main>
+
+
 
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+  <!--Toastr-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </body>
 
 </html>

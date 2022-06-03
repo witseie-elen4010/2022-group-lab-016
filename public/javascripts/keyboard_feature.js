@@ -9,6 +9,27 @@ const BUTTONS = [];
 const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
 const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
 const game_buttons = Array.from(document.getElementsByClassName('button'));
+const GUESSES = 6;
+let guesses_left = GUESSES;
+let game_over = false;
+
+//toastr
+toastr.options = {
+  "closeButton": true,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-bottom-full-width",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "9000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 
 const get_element_function = function (value) {
   const element = String(value);
@@ -18,9 +39,10 @@ const get_element_function = function (value) {
 const review_answer = function () {
   let n = 0;
   let correct_word = correctWord;
+  let guess_word = '';
   for (let i = (SCREEN_CURSOR - (BUTTON_LENGTH - 1)); i <= SCREEN_CURSOR; i++) {
     const element = get_element_function(i).innerText;
-
+    guess_word += element; 
     for (let k = 0; k < correct_word.length; k++) {
       if (correct_word[k] === element && n === k) {
       
@@ -35,6 +57,9 @@ const review_answer = function () {
         BUTTONS[n].style.backgroundColor = 'rgba(201, 180, 88, 255)';
         correct_word = correct_word.slice(0, k) +' '+ correct_word.slice(k + 1 , correct_word.length);
 
+
+let monitorKeyPressed = function (element) {
+
         break;
       } else {
 
@@ -44,6 +69,21 @@ const review_answer = function () {
     }
     n++;
   }
+  // Winning or losing game
+  if (guess_word === correctWord) {
+    toastr.success("You guessed Correctly! Game Over!");
+    game_over = true;
+    return;
+  } else{
+    guesses_left--;
+    if (guesses_left === 0){
+      toastr.error("You're out of guesses! Game Over!");
+      game_over = true;
+      return
+    }
+  }
+  
+  
 }
 
 let prompt_user = function(){
@@ -59,6 +99,7 @@ let prompt_user = function(){
 }
 
 let monitorKeyPressed = function(element, button){
+
 
   switch (element) {
     case 'ENTER':
@@ -76,6 +117,7 @@ let monitorKeyPressed = function(element, button){
     case 'DEL':
       // allow the user to delete some elements
       get_element_function(SCREEN_CURSOR).innerText = '\xa0';
+
        if ((SCREEN_CURSOR - 1) % BUTTON_LENGTH !== 0) {
            SCREEN_CURSOR--;
        } else{
@@ -92,28 +134,36 @@ let monitorKeyPressed = function(element, button){
         SUBMIT = false;
         DELETE = false;
      }
+
       break
   }
 }
 
 game_buttons.map(button => {
   button.addEventListener('click', (e) => {
+
    const element = e.target.innerText;
    monitorKeyPressed(element, button);
+
   })
 })
 
-let getButton = function(element){
-  if(element === 'Backspace') element = 'DEL';
+let getButton = function (element) {
+  if (element === 'Backspace') element = 'DEL';
 
   element = element.toUpperCase();
+
   game_buttons.forEach( function(button){
      const keyboard_element = button.name.toUpperCase();
      if(element === keyboard_element){
         monitorKeyPressed(element, button);
      }
+
   })
 }
-document.addEventListener('keydown', function(event){
+document.addEventListener('keydown', function (event) {
   getButton(event.key);
-})
+});
+
+
+
