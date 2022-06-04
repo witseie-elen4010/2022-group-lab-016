@@ -36,7 +36,7 @@ const get_element_function = function (value) {
   return document.getElementById(element);
 }
 // review the answer submited by the user
-const review_answer = function () {
+ const review_answer = function () {
   let n = 0;
   let correct_word = correctWord;
   let guess_word = '';
@@ -56,10 +56,6 @@ const review_answer = function () {
         get_element_function(i).style.backgroundColor = 'rgba(201, 180, 88, 255)';
         BUTTONS[n].style.backgroundColor = 'rgba(201, 180, 88, 255)';
         correct_word = correct_word.slice(0, k) +' '+ correct_word.slice(k + 1 , correct_word.length);
-
-
-let monitorKeyPressed = function (element) {
-
         break;
       } else {
 
@@ -85,6 +81,7 @@ let monitorKeyPressed = function (element) {
   
   
 }
+
 
 let prompt_user = function(){
   const pop_up = document.createElement('div');
