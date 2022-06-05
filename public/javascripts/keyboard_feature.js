@@ -10,7 +10,6 @@ const GUESSES = 6;
 let guesses_left = GUESSES;
 let game_over = false;
 let myscreenColor = [];
-let mode = 'multiplayer';
 //toastr
 toastr.options = {
   "closeButton": true,
@@ -28,9 +27,6 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
-const select = document.getElementById('gameMode');
-const SELECTED_MODE = select.options[select.selectedIndex].value
-if(SELECTED_MODE === 'SinglePlayerMode') mode = 'singleplayer';
 
 const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
 const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
@@ -69,10 +65,8 @@ const get_element_function = function (value) {
     }
     n++;
   }
-  // if it is multiplayer mode, submit the word to the other user
-    if( mode === 'multiplayer'){
+  // if it is multiplayer mode, submit the word to the other user. else submit to nothing
       sendMessage(myscreenColor.join(''));
-    }
   // Winning or losing game
   if (guess_word === correctWord) {
     toastr.success("You guessed Correctly! Game Over!");
@@ -157,7 +151,6 @@ let getButton = function (element) {
      if(element === keyboard_element){
         monitorKeyPressed(element, button);
      }
-
   })
 }
 document.addEventListener('keydown', function (event) {

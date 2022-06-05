@@ -1,16 +1,17 @@
-const select = document.getElementById('gameMode');
-let CURRENT_MODE = select.options[select.selectedIndex].value;
+const SELECT = document.getElementById('gameMode');
 
 document.getElementById('switchMode').addEventListener('click', () =>{
-  const SELECTED_MODE = select.options[select.selectedIndex].value
-  let url = ''
-  if(SELECTED_MODE === 'MultiPlayerMode' && CURRENT_MODE !== SELECTED_MODE){
-     url = 'http://localhost:3000/multiplayer#'
-     window.open(url, '_self') 
+   
+  if(confirm('You will loose your current progress, change mode ?')){
+    const select_mode = SELECT.options[SELECT.selectedIndex].value;
+    let url = '';
+    if(select_mode === 'MultiPlayerMode'){
+         url = 'http://localhost:3000/multiplayer';
+        window.open(url, '_self'); 
+    }
+    else if(select_mode === 'SinglePlayerMode'){
+        url = 'http://localhost:3000/screen';
+        window.open(url, '_self');
+    }
   }
-  else if(SELECTED_MODE === 'SinglePlayerMode' && CURRENT_MODE !== SELECTED_MODE){
-     url = 'http://localhost:3000/screen' 
-     window.open(url, '_self')
-  }
-  CURRENT_MODE = SELECTED_MODE;
 })
