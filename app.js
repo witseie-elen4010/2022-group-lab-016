@@ -57,6 +57,13 @@ app.get('/screen', (req, res) => {
   res.sendFile(index);
 });
 
+//Multiplayer
+app.use(express.static(__dirname + '/public'));
+app.get('/multiplayer', (req, res) => {
+  const index = path.join(__dirname, 'views', 'multiplayer.html');
+  res.sendFile(index);
+});
+
 //Login
 app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => {
