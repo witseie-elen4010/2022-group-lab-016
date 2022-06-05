@@ -28,6 +28,9 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+const select = document.getElementById('gameMode');
+const SELECTED_MODE = select.options[select.selectedIndex].value
+if(SELECTED_MODE === 'SinglePlayerMode') mode = 'singleplayer';
 
 const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
 const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
