@@ -96,3 +96,46 @@
   .keyboard-row button:hover{
     background-color: grey; 
   }
+
+  #main-content {
+    margin-left : auto;
+    margin-right : auto;
+  }
+
+  #Icon {
+    color: gainsboro;
+     background-color: black;
+  }
+
+  #primary_color {
+    color: gainsboro;
+  }
+
+#W_back {
+    background-color: #66BB6A;
+}
+
+#I_back {
+    background-color: #FFF176;
+}
+
+#U_back {
+    background-color: #9E9E9E;
+}
+
+#popMessage{
+  border: 2px solid rgb(124, 124, 131);
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  color: black;
+  text-align: center;
+  margin-top: 10%;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#pop_message{
+  position: fixed;
+  left: 41%;
+}
