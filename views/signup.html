@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
   <title>Competitive Wordle Sign Up</title>
 
   <!-- Bootstrap bundle -->
@@ -41,7 +42,11 @@
 
               <!-- <input type="submit" value="Submit Form" /> -->
               <button type="submit" id="button-signup" class=" btn signup-btn btn-lg">Sign Up</button>
-              <p>Already have an account? <a href="/signin">Sign-in here</a></p>
+              <p>Already have an account? <a href="/">Sign-in here</a></p>
+
+              <div class="g-signin2" data-width="350" data-height="40" data-longtitle="true" data-onsuccess = "onSignIn"></div>
+              <script src="https://apis.google.com/js/platform.js?" async defer></script>
+              
             </form>
 
           </div>

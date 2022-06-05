@@ -28,3 +28,11 @@ async function registerUser(event) {
     alert(result.error)
   }
 }
+
+function onSignIn(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+
+function onFailure(error) {
+  console.log(error);
+}
