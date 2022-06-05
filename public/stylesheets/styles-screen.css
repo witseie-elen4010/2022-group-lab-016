@@ -104,3 +104,30 @@
   position: fixed;
   left: 41%;
 }
+
+@keyframes mymove {
+  to{background: rgba(106, 170, 100, 255);}
+  100% {transform: rotateX(360deg); }
+}
+
+@keyframes mymove2 {
+  to{background: rgba(201, 180, 88, 255);}
+  100% {transform: rotateX(360deg); }
+}
+
+@keyframes mymove3 {
+  to{background: rgba(120, 124, 126, 255);}
+  100% {transform: rotateX(360deg); }
+}
+
+#logoutButton{
+  position: absolute;
+  left: 300px;
+  top: 400px;
+}
+
+#switchMode{
+  position: absolute;
+  left: 0px;
+  top: 400px;
+}

@@ -96,3 +96,101 @@
   .keyboard-row button:hover{
     background-color: grey; 
   }
+
+  #main-content {
+    margin-left : auto;
+    margin-right : auto;
+  }
+
+  #Icon {
+    color: gainsboro;
+     background-color: black;
+  }
+
+  #primary_color {
+    color: gainsboro;
+  }
+
+#W_back {
+    background-color: #66BB6A;
+}
+
+#I_back {
+    background-color: #FFF176;
+}
+
+#U_back {
+    background-color: #9E9E9E;
+}
+
+#popMessage{
+  border: 2px solid rgb(124, 124, 131);
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  color: black;
+  text-align: center;
+  margin-top: 10%;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#pop_message{
+  position: fixed;
+  left: 41%;
+}
+
+@keyframes mymove {
+  to{background: rgba(106, 170, 100, 255);}
+  100% {transform: rotateX(360deg); }
+}
+
+@keyframes mymove2 {
+  to{background: rgba(201, 180, 88, 255);}
+  100% {transform: rotateX(360deg); }
+}
+
+@keyframes mymove3 {
+  to{background: rgba(120, 124, 126, 255);}
+  100% {transform: rotateX(360deg); }
+}
+
+#logoutButton{
+  position: absolute;
+  left: 300px;
+  top: 400px;
+}
+
+#switchMode{
+  position: absolute;
+  left: 0px;
+  top: 400px;
+}
+
+#userDetails{
+  position: absolute;
+  top: 50px;
+}
+#userDetails >label{
+  color: white;
+  border-radius: 5px;
+}
+
+#invitePlayers{
+  position: absolute;
+  top: 50px;
+  left: 55%;
+}
+
+#invitePlayers >label{
+  color: white;
+}
+
+#invitePlayers >button, input{
+  border-radius: 5px;
+}
+
+#invitePlayers >button:hover{
+  background-color: gray;
+  border-radius: 5px;
+}

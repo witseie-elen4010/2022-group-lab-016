@@ -6,13 +6,11 @@ const NUMBER_OF_BUTTONS = 30;
 let SUBMIT = false;
 let DELETE = false;
 const BUTTONS = [];
-const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
-const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
-const game_buttons = Array.from(document.getElementsByClassName('button'));
 const GUESSES = 6;
 let guesses_left = GUESSES;
 let game_over = false;
-
+let myscreenColor = [];
+let mode = 'multiplayer';
 //toastr
 toastr.options = {
   "closeButton": true,
@@ -30,6 +28,13 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+const select = document.getElementById('gameMode');
+const SELECTED_MODE = select.options[select.selectedIndex].value
+if(SELECTED_MODE === 'SinglePlayerMode') mode = 'singleplayer';
+
+const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
+const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
+const game_buttons = Array.from(document.getElementsByClassName('button'));
 
 const get_element_function = function (value) {
   const element = String(value);
@@ -45,26 +50,29 @@ const get_element_function = function (value) {
     guess_word += element; 
     for (let k = 0; k < correct_word.length; k++) {
       if (correct_word[k] === element && n === k) {
-      
-        get_element_function(i).style.backgroundColor = 'rgba(106, 170, 100, 255)';
+        get_element_function(i).style.animation =  'mymove 1s 1 linear forwards ' + String(n) + 's'
         BUTTONS[n].style.backgroundColor = 'rgba(106, 170, 100, 255)';
         correct_word = correct_word.slice(0, k) +' '+ correct_word.slice(k + 1 , correct_word.length);
-
+        myscreenColor[n] ='1';
         break;
       } else if (correct_word[k] === element) {
-
-        get_element_function(i).style.backgroundColor = 'rgba(201, 180, 88, 255)';
+        get_element_function(i).style.animation = 'mymove2 1s 1 linear forwards ' + String(n) + 's'
         BUTTONS[n].style.backgroundColor = 'rgba(201, 180, 88, 255)';
         correct_word = correct_word.slice(0, k) +' '+ correct_word.slice(k + 1 , correct_word.length);
+        myscreenColor[n] ='2';
         break;
       } else {
-
-        get_element_function(i).style.backgroundColor = 'rgba(120, 124, 126, 255)'
+        get_element_function(i).style.animation = 'mymove3 1s 1 linear forwards ' + String(n) + 's'
         BUTTONS[n].style.backgroundColor = 'rgba(120, 124, 126, 255)';
+        myscreenColor[n] ='3';
       }
     }
     n++;
   }
+  // if it is multiplayer mode, submit the word to the other user
+    if( mode === 'multiplayer'){
+      sendMessage(myscreenColor.join(''));
+    }
   // Winning or losing game
   if (guess_word === correctWord) {
     toastr.success("You guessed Correctly! Game Over!");
@@ -78,8 +86,6 @@ const get_element_function = function (value) {
       return
     }
   }
-  
-  
 }
 
 
@@ -87,23 +93,21 @@ let prompt_user = function(){
   const pop_up = document.createElement('div');
   pop_up.setAttribute('id','popMessage');
   const pop = document.getElementById('pop');
-  const text = 'Not enough letters'
+  const text = 'Not enough letters';
   pop_up.innerText = text;
   pop.appendChild(pop_up);
   setTimeout(function(){
-      pop.removeChild(pop.firstChild)
+      pop.removeChild(pop.firstChild);
   }, 1000)
 }
 
 let monitorKeyPressed = function(element, button){
-
-
   switch (element) {
     case 'ENTER':
       // allow the user to submit guesses
       if ((SCREEN_CURSOR) % BUTTON_LENGTH === 0 && SCREEN_CURSOR !== 0){
-        review_answer()
-        BUTTONS.splice(0, BUTTONS.length)
+        review_answer();
+        BUTTONS.splice(0, BUTTONS.length);
         SUBMIT = true;
         SCREEN_CURSOR++;
         break;
@@ -118,8 +122,8 @@ let monitorKeyPressed = function(element, button){
        if ((SCREEN_CURSOR - 1) % BUTTON_LENGTH !== 0) {
            SCREEN_CURSOR--;
        } else{
-        BUTTONS.pop() 
-        DELETE = true
+        BUTTONS.pop();
+        DELETE = true;
        }
       break
     default:
@@ -127,7 +131,7 @@ let monitorKeyPressed = function(element, button){
       if ((SCREEN_CURSOR % BUTTON_LENGTH !== 0 || SUBMIT === true || SCREEN_CURSOR === 0) && SCREEN_CURSOR < NUMBER_OF_BUTTONS) {
         if(!(DELETE || SUBMIT)) SCREEN_CURSOR++;
         get_element_function(SCREEN_CURSOR).innerText = element;
-        BUTTONS.push(button)
+        BUTTONS.push(button);
         SUBMIT = false;
         DELETE = false;
      }
@@ -138,10 +142,8 @@ let monitorKeyPressed = function(element, button){
 
 game_buttons.map(button => {
   button.addEventListener('click', (e) => {
-
    const element = e.target.innerText;
    monitorKeyPressed(element, button);
-
   })
 })
 
