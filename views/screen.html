@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wordle</title>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="/javascripts/screen.js"></script>
 
   <script defer src="/javascripts/keyboard_feature.js"></script>
@@ -24,14 +25,15 @@
 <body class="bg-black">
   <header class="d-flex justify-content-between mb-0">
     <section>
-      <button type="button" class="btn bi bi-list ps-2 pt-0 pe-0" name="menu" id="Icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasmenu" aria-controls="offcanvasmenu"
-        style="font-size: 1.8rem;"></button>
+      <button type="button" class="btn bi bi-list ps-2 pt-0 pe-0" name="menu" id="Icon" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasmenu" aria-controls="offcanvasmenu" style="font-size: 1.8rem;"></button>
       <button type="button" class="btn bi bi-question-circle pt-0 py-0 ps-1 pb-1" name="instructions" id="Icon"
         style="font-size: 1.3rem;" data-bs-toggle="modal" data-bs-target="#InstructionsModal"></button>
     </section>
     <h1 class="fw-bold m-auto" id="primary_color">Wordle</h1>
     <section>
-      <button type="button" class="btn bi bi-bar-chart-fill" name="menu" id="Icon" style="font-size: 1.4rem;" data-bs-toggle="modal" data-bs-target="#StatsModal"></button>
+      <button type="button" class="btn bi bi-bar-chart-fill" name="menu" id="Icon" style="font-size: 1.4rem;"
+        data-bs-toggle="modal" data-bs-target="#StatsModal"></button>
       <button type="button" class="btn bi bi-gear-fill p-0 pe-2" name="menu" id="Icon"
         style="font-size: 1.4rem;"></button>
     </section>
@@ -39,14 +41,15 @@
   <hr class="p-0 mt-0 me-2" id="primary_color">
 
   <!--menu content-->
-  <div class="offcanvas offcanvas-start bg-black py-5 text-white" tabindex="-1" id="offcanvasmenu" aria-labelledby="offcanvasmenulabel">
+  <div class="offcanvas offcanvas-start bg-black py-5 text-white" tabindex="-1" id="offcanvasmenu"
+    aria-labelledby="offcanvasmenulabel">
     <div class="offcanvas-header">
-      <button type="button" class="btn btn-success"><a class="text-white"href="#">Log out</a></button>
+      <button type="button" class="btn btn-success"><a class="text-white" href="/">Log out</a></button>
       <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <!--content-->
-      
+
     </div>
   </div>
 
@@ -112,8 +115,8 @@
   </div>
 
 
-  <div id = 'pop_message'>
-    <div id = 'pop'></div>
+  <div id='pop_message'>
+    <div id='pop'></div>
   </div>
 
   <!--Stats modal-->
@@ -137,7 +140,7 @@
             <section class="">
               <div class="d-flex flex-row justify-content-around">0</div>
               <div>
-                <div class="d-flex flex-row justify-content-around"> Current</div> 
+                <div class="d-flex flex-row justify-content-around"> Current</div>
                 <div class="d-flex flex-row justify-content-around">Streak</div>
               </div>
             </section>
@@ -155,7 +158,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <main class="align-self-center w-50 d-flex flex-column align-items-center pt-5" id="main-content">
     <div id="board-container"></div>
@@ -203,9 +206,6 @@
     </div>
 
 
-    <form action="/signin">
-      <input type="submit" value="logout" />
-    </form>
   </main>
 
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path');
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -31,9 +31,7 @@ app.use(bodyParser.json())
 
 
 
-app.get('/', (request, response) => {
-  return response.send('Hello devs, this is our root endpoint')
-})
+
 
 
 //instructions
@@ -61,7 +59,7 @@ app.get('/screen', (req, res) => {
 
 //Login
 app.use(express.static(__dirname + '/public'));
-app.get('/signin', (req, res) => {
+app.get('/', (req, res) => {
   const index = path.join(__dirname, 'views', 'signin.html');
   res.sendFile(index);
 });
@@ -69,7 +67,7 @@ app.get('/signin', (req, res) => {
 
 //login
 app.use(express.static(__dirname + '/public'));
-app.post('/signin', async (req, res) => {
+app.post('/', async (req, res) => {
   const { username, password } = req.body
   const user = await User.findOne({ username }).lean()
 
@@ -93,9 +91,6 @@ app.post('/signin', async (req, res) => {
 
   res.json({ status: 'error', error: 'Invalid username/password' })
 })
-
-
-
 
 //SignUp
 app.use(express.static(__dirname + '/public'));
@@ -141,7 +136,6 @@ app.post('/signup', async (req, res) => {
 
   res.json({ status: 'ok' })
 })
-
 
 
 app.listen(port, () => {
