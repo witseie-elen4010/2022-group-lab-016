@@ -33,9 +33,9 @@ app.use(bodyParser.json())
 const server = require('http').createServer(app)
 const io = require('socket.io')( server, { cors: { origin: '*'}})
 
+// the username of this player should be obtained from the database since he/she is the user of the web page
 let selectedUsers = [
   'brian',
-  'courage',
 ]
 
 app.use(express.static(__dirname + '/public'))
@@ -52,10 +52,11 @@ server.listen(port, () =>{
 
 let userIDs = [];
 let i = 0;
+
 io.on('connection', (socket)=>{
 
     socket.on('message', (data)=>{
-
+    
         if( selectedUsers.includes(data[0]) && data[1] === 'startingWeb'){
             userIDs[selectedUsers.indexOf(data[0])] = socket.id
             if(data[2] !== 'username') selectedUsers.push(data[2]);
