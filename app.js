@@ -29,8 +29,43 @@ mongoose.connect("mongodb+srv://Tadiwa:test123@cluster0.vlabe.mongodb.net/Cluste
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.json())
 
+// socket connection implementation
+const server = require('http').createServer(app)
+const io = require('socket.io')( server, { cors: { origin: '*'}})
 
+let selectedUsers = [
+  'brian',
+  'courage',
+]
 
+app.use(express.static(__dirname + '/public'))
+
+app.set('view engine', 'ejs')
+
+app.get('/multiplayer', (req, res)=>{
+    res.render('multiplayer')
+})
+
+server.listen(port, () =>{
+    console.log('running.....')
+})
+
+let userIDs = []
+let i = 0
+io.on('connection', (socket)=>{
+    socket.on('message', (data)=>{
+        if( selectedUsers.includes(data[0]) && data[1] === 'startingWeb'){
+            userIDs[selectedUsers.indexOf(data[0])] = socket.id
+        }
+        else if(selectedUsers.includes(data[0])){
+            for(let i = 0; i < userIDs.length; i++){
+                if(selectedUsers[i] !== data[0]){
+                    io.to(userIDs[selectedUsers.indexOf(selectedUsers[i])]).emit('message', data[1]);
+                }
+            }
+        }
+    })
+})
 
 
 
@@ -54,13 +89,6 @@ app.get('/reset_password', (req, res) => {
 app.use(express.static(__dirname + '/public'));
 app.get('/screen', (req, res) => {
   const index = path.join(__dirname, 'views', 'screen.html');
-  res.sendFile(index);
-});
-
-//Multiplayer
-app.use(express.static(__dirname + '/public'));
-app.get('/multiplayer', (req, res) => {
-  const index = path.join(__dirname, 'views', 'multiplayer.html');
   res.sendFile(index);
 });
 
@@ -145,9 +173,9 @@ app.post('/signup', async (req, res) => {
 })
 
 
-app.listen(port, () => {
-  console.log('Express server running on port', port)
-})
+//app.listen(port, () => {
+  //console.log('Express server running on port', port)
+//})
 
 // verify user 
 
