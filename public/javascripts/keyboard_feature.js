@@ -6,15 +6,11 @@ const NUMBER_OF_BUTTONS = 30;
 let SUBMIT = false;
 let DELETE = false;
 const BUTTONS = [];
-const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
-const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
-const game_buttons = Array.from(document.getElementsByClassName('button'));
 const GUESSES = 6;
 let guesses_left = GUESSES;
 let game_over = false;
-let mode = 'multiplayer';
 let myscreenColor = [];
-
+let mode = 'multiplayer';
 //toastr
 toastr.options = {
   "closeButton": true,
@@ -32,6 +28,10 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+
+const wordBase = ['BRIAN', 'BRAIN', 'HINGE', 'ABUSE', 'ABOUT', 'ADOPT', 'ACUTE', 'ADMIT'];
+const correctWord = wordBase[Math.floor(Math.random() * wordBase.length)];
+const game_buttons = Array.from(document.getElementsByClassName('button'));
 
 const get_element_function = function (value) {
   const element = String(value);

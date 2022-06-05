@@ -119,3 +119,15 @@
   to{background: rgba(120, 124, 126, 255);}
   100% {transform: rotateX(360deg); }
 }
+
+#logoutButton{
+  position: absolute;
+  left: 300px;
+  top: 400px;
+}
+
+#switchMode{
+  position: absolute;
+  left: 0px;
+  top: 400px;
+}

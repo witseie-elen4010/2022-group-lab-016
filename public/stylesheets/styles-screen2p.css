@@ -154,3 +154,43 @@
   to{background: rgba(120, 124, 126, 255);}
   100% {transform: rotateX(360deg); }
 }
+
+#logoutButton{
+  position: absolute;
+  left: 300px;
+  top: 400px;
+}
+
+#switchMode{
+  position: absolute;
+  left: 0px;
+  top: 400px;
+}
+
+#userDetails{
+  position: absolute;
+  top: 50px;
+}
+#userDetails >label{
+  color: white;
+  border-radius: 5px;
+}
+
+#invitePlayers{
+  position: absolute;
+  top: 50px;
+  left: 55%;
+}
+
+#invitePlayers >label{
+  color: white;
+}
+
+#invitePlayers >button, input{
+  border-radius: 5px;
+}
+
+#invitePlayers >button:hover{
+  background-color: gray;
+  border-radius: 5px;
+}

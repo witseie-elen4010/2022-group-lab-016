@@ -50,12 +50,15 @@ server.listen(port, () =>{
     console.log('running.....')
 })
 
-let userIDs = []
-let i = 0
+let userIDs = [];
+let i = 0;
 io.on('connection', (socket)=>{
+
     socket.on('message', (data)=>{
+
         if( selectedUsers.includes(data[0]) && data[1] === 'startingWeb'){
             userIDs[selectedUsers.indexOf(data[0])] = socket.id
+            if(data[2] !== 'username') selectedUsers.push(data[2]);
         }
         else if(selectedUsers.includes(data[0])){
             for(let i = 0; i < userIDs.length; i++){
