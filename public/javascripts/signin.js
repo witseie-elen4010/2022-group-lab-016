@@ -35,3 +35,11 @@ if (window.history && history.pushState) {
     });
   });
 }
+
+function onSignIn(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+
+function onFailure(error) {
+  console.log(error);
+}
