@@ -43,14 +43,19 @@
     <section>
       <button type="button" class="btn bi bi-bar-chart-fill" name="menu" id="Icon" style="font-size: 1.4rem;"
         data-bs-toggle="modal" data-bs-target="#StatsModal"></button>
-      <button type="button" class="btn bi bi-gear-fill p-0 pe-2" name="menu" id="Icon"
-        style="font-size: 1.4rem;"></button>
+      <button type="button" class="btn bi bi-gear-fill p-0 pe-2" name="menu" id="Icon" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvastheme" aria-controls="offcanvastheme" style="font-size: 1.4rem;"></button>
     </section>
 
   </header>
   <hr class="p-0 mt-0 me-2" id="primary_color">
   
-  <label id="theme_mode"></label>
+  <!-- Theme mode -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvastheme" aria-labelledby="offcanvastheme-label">
+    <span id="dark_mode"> Dark mode: </span>  
+    <label id="theme_mode" ></label>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
 
   <!--menu content-->
   <div class="offcanvas offcanvas-start py-5 text-white" tabindex="-1" id="offcanvasmenu" aria-labelledby="offcanvasmenulabel">
@@ -61,14 +66,15 @@
       <option value = "MultiPlayerMode">Multi-player mode</option>
     </select>
 
+    
     <div class="offcanvas-header">
       <button type="button" class="btn btn-success" id = "logoutButton"><a class="text-white"href="#">Log out</a></button>
-      <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+    
 
     <div class="offcanvas-header">
       <button type="button" class="btn btn-success" id = "switchMode"><a class="text-white"href="#">Switch Mode</a></button>
-      <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close"data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
     <div class="offcanvas-body">
@@ -237,7 +243,7 @@
     crossorigin="anonymous"></script>
   <!--Toastr-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <script src="/javascripts/theme.js"></script
+  <script src="/javascripts/theme.js"></script>
 
 </body>
 
