@@ -61,7 +61,6 @@ const checkAddedUsers = function(listOfUsers, username, userId){
   listOfUsers.forEach( element => {
     if(element.name === username && String(element.id) === String(userId)){
       result = true;
-      return result;
     } 
   })
   return result
