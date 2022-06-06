@@ -1,0 +1,50 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+
+.player-mode-text {
+    font-weight: bold;
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    margin-top: 8%;
+}
+
+.card {
+    padding: 20px 10px 5px;
+    background-color: rgba(239, 253, 235, 0.664);
+    border-radius: 10px;
+    box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
+    -webkit-box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
+    -moz-box-shadow: 5px 5px 30px rgba(87, 87, 87, 0.7);
+}
+
+#player_mode_single-form,
+#player_mode_multi-form {
+    max-width: 350px;
+    margin: auto;
+}
+
+#mode-btn {
+    width: 100%;
+    background-color: black;
+    color: white;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+#mode-btn:hover {
+    background-color: green;
+    color: black;
+}
