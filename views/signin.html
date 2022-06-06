@@ -38,11 +38,18 @@
       <div class="col-sm-12 col-md-8">
         <div class="card signin-card">
           <div class="card-block">
-            <p class="signin-text"> Sign-in to your account</p>
+            <p class="signin-text"> Sign in</p>
 
             <form id="signin-form">
 
-              <div class="form-group">
+              <div class="mb-3">
+                <div class="g-signin2" data-width="350" data-height="40" data-longtitle="true" data-onsuccess = "onSignIn"></div>
+                <script src="https://apis.google.com/js/platform.js?" async defer></script>
+              </div>
+
+              <p class="d-flex flex-row justify-content-center">or:</p>
+
+              <div class="form-group my-3">
                 <input type="text" autocomplete="off" id="username" placeholder="Username" class="form-control" />
               </div>
 
@@ -50,14 +57,19 @@
                 <input type="password" autocomplete="off" id="password" placeholder="Password" class="form-control" />
               </div>
 
-              <button type="submit" id="button-signin" class=" btn signin-btn btn-lg">Sign In</button>
-              <p>Don't have an account? <a href="/signup">Sign-up here</a></p>
+              <div class="d-flex flex-row justify-content-around">
+                <div class="form-check my-3">
+                  <input type="checkbox" class="form-check-input" id="remember-me">
+                  <label class="form-check-label" for="remember-me">Remember me</label>
+                </div>
+                <a class="text-decoration-none my-3 text-black" href="/verify_user">Forgot password?</a>
+              </div>
 
-              <div class="g-signin2" data-width="350" data-height="40" data-longtitle="true" data-onsuccess = "onSignIn"></div>
-              <script src="https://apis.google.com/js/platform.js?" async defer></script>
-              
-              <a href="/verify_user">Forgot your password?</a>
-              
+              <button type="submit" id="button-signin" class=" btn signin-btn h6 mt-1">SIGN IN</button>
+
+              <div class="d-flex flex-row justify-content-center">
+                <p>Don't have an account? <a class="text-decoration-none text-black" href="/signup">Sign up</a></p>
+              </div>
             </form>
 
           </div>
