@@ -23,31 +23,37 @@
 
 </head>
 
-<body class="bg-black">
+<body>
 
   <div id='pop_message'>
     <div id='pop'></div>
   </div>
   
   <header class="d-flex justify-content-between mb-0">
+
     <section>
       <button type="button" class="btn bi bi-list ps-2 pt-0 pe-0" name="menu" id="Icon" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasmenu" aria-controls="offcanvasmenu" style="font-size: 1.8rem;"></button>
       <button type="button" class="btn bi bi-question-circle pt-0 py-0 ps-1 pb-1" name="instructions" id="Icon"
         style="font-size: 1.3rem;" data-bs-toggle="modal" data-bs-target="#InstructionsModal"></button>
     </section>
+
     <h1 class="fw-bold m-auto" id="primary_color">Wordle</h1>
+    
     <section>
       <button type="button" class="btn bi bi-bar-chart-fill" name="menu" id="Icon" style="font-size: 1.4rem;"
         data-bs-toggle="modal" data-bs-target="#StatsModal"></button>
       <button type="button" class="btn bi bi-gear-fill p-0 pe-2" name="menu" id="Icon"
         style="font-size: 1.4rem;"></button>
     </section>
+
   </header>
   <hr class="p-0 mt-0 me-2" id="primary_color">
+  
+  <label id="theme_mode"></label>
 
   <!--menu content-->
-  <div class="offcanvas offcanvas-start bg-black py-5 text-white" tabindex="-1" id="offcanvasmenu" aria-labelledby="offcanvasmenulabel">
+  <div class="offcanvas offcanvas-start py-5 text-white" tabindex="-1" id="offcanvasmenu" aria-labelledby="offcanvasmenulabel">
 
     <select name = "mode" id = "gameMode">
       <option value = "None">Select game mode</option>
@@ -75,12 +81,12 @@
   <div class="modal fade" id="InstructionsModal" tabindex="-1" aria-labelledby="InstructionsModalLabel"
     aria-hidden="false">
     <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content bg-black align-self-center w-75  align-items-center pt-5" id="main-content">
-        <div class=" modal-header bg-black fw-bold fs-5" id="primary_color">
+      <div class="modal-content align-self-center w-75  align-items-center pt-5" id="main-content">
+        <div class=" modal-header fw-bold fs-5" id="primary_color">
           <p class="m-auto">HOW TO PLAY</p>
           <button type="button" class="btn-close" id="Icon" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body bg-black" id="primary_color">
+        <div class="modal-body" id="primary_color">
           <p>Guess the <span class="fw-bold">WORDLE</span> in six tries.</p>
 
           <p class="py-0 my-1">Each guess must be a valid five-letter word. Hit the enter button to submit.</p>
@@ -135,8 +141,8 @@
   <!--Stats modal-->
   <div class="modal fade" id="StatsModal" tabindex="-1" aria-labelledby="StatsModalLabel" aria-hidden="false">
     <div class="modal-dialog">
-      <div class="modal-content bg-black text-white ">
-        <div class="modal-header bg-black">
+      <div class="modal-content">
+        <div class="modal-header">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -231,6 +237,7 @@
     crossorigin="anonymous"></script>
   <!--Toastr-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="/javascripts/theme.js"></script
 
 </body>
 

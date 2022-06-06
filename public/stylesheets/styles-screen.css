@@ -23,7 +23,7 @@
     font-weight: bold;
 
 
-    color: white;
+    color: #1E1F20;
     text-align: center;
 
   }
@@ -48,7 +48,7 @@
     height: 58px;
     cursor: pointer;
     background-color: lightgray;
-    color: white;
+    color: #1E1F20;
     flex-grow: 1;
     text-transform: uppercase;
     margin-right: 3px;
@@ -68,12 +68,11 @@
   }
 
   #Icon {
-    color: gainsboro;
-     background-color: black;
+    color: #22181C;
   }
 
   #primary_color {
-    color: gainsboro;
+    color: #22181C;
   }
 
 #W_back {
@@ -130,4 +129,50 @@
   position: absolute;
   left: 0px;
   top: 400px;
+}
+
+label {
+  position: absolute;
+  width: 47px;
+  height: 23px;
+  right: 80px;
+  top: 11px;
+  border: 2px solid;
+  border-radius: 20px;
+}
+
+label:before {
+  position: absolute;
+  content: "";
+  width: 17px;
+  height: 17px;
+  left: 1px;
+  top: 1px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: black;
+  transition: 0.4s
+}
+
+label.day:before {
+  left: 24px;
+  background: white;
+}
+
+body.night {
+  background-color: black;
+  color: gainsboro; 
+}
+
+body.night .modal-dialog,
+body.night .modal-content,
+body.night .modal-body,
+body.night .offcanvas {
+  background-color: black;
+}
+
+body.night #Icon,
+body.night #primary_color,
+body.night .square {
+  color: gainsboro;
 }
