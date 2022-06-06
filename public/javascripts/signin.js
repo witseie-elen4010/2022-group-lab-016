@@ -6,6 +6,9 @@ async function login(event) {
   const username = document.getElementById('username').value
   const password = document.getElementById('password').value
 
+  localStorage.setItem('username', username);
+  localStorage.setItem('id', -1 );
+  
   const result = await fetch('/', {
     method: 'POST',
     headers: {
