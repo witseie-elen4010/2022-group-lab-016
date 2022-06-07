@@ -196,12 +196,12 @@
     <div class="modal-dialog">
       <div class="modal-content bg-black text-white ">
         <div class="modal-header bg-black  d-flex flex-row justify-content-center align-text-center">
-          <p class="text-white">ADD PLAYER</p>
+          <p class="text-white mb-0 pb-0">Invite player</p>
           
         </div>
         <div class="modal-body">
           <main class="d-flex flex-row justify-content-around">
-           
+
           </main>
         </div>
         <div class="modal-footer">
@@ -308,11 +308,27 @@
           users_added.push(user_added);
         })
 
-        function addBoard(){
+        function addBoard(username, count){
           const list = document.getElementById('boardList')
-          var newBoard = document.createElement('li')
+          //item to add to the list
+          let newBoard = document.createElement('li')
           newBoard.setAttribute('class', 'mx-5 pt-0')
-          newBoard.setAttribute('id',`checkerboard_${count}`)
+          //list items
+          let paragraph = document.createElement('p')
+          paragraph.setAttribute('class', 'text-white d-flex flex-row justify-content-center align-text-center')
+          let text = document.createTextNode(username)
+          paragraph.appendChild(text)
+          let board_container = document.createElement('div')
+          board_container.setAttribute('id', 'board-container')
+          let checker = document.createElement('div')
+          checker.setAttribute('class', 'pb-2')
+          checker.setAttribute('id',`checker_board_${count}`)
+          //append all the list elements
+          newBoard.appendChild(paragraph)
+          newBoard.appendChild(board_container)
+          newBoard.appendChild(checker)
+          //append new list element to the list
+          list.appendChild(newBoard)
         }
 
     </script>
