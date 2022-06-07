@@ -23,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.5",
     "nodemon": "^2.0.16",
+    "playwright": "^1.22.2",
     "socket.io": "^4.5.1"
   }
 }
