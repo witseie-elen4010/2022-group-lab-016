@@ -303,18 +303,19 @@
     
     <script>
         let users_added = []
-
+        let n = 30;
+        localStorage.setItem('n', 30);
         document.getElementById('invites').value = ''
         document.getElementById('gId').value = ''
         document.getElementById('player').value = ''
         
-
-        const socket = io('http://localhost:3000');
+        const port = process.env.PORT || 3000;
+        const socket = io(port);
         
         socket.on('connection');
         // sends data to the opponent, i.e this is what the oppenent gets
         socket.on('message', (data) =>{
-            updateOpponentScreen(data);
+            updateOpponentScreen(data[0]);
         })
 
         socket.on('update', (data) => {
@@ -456,42 +457,6 @@
             users_added.length = 0;
             socket.emit('leave', [username, id]);
         })
-
-        function addBoard(username){
-          let count = Number(sessionStorage.getItem('count'))
-          const list = document.getElementById('boardList')
-          //item to add to the list
-          let newBoard = document.createElement('li')
-          newBoard.setAttribute('class', 'mx-5 pt-0')
-          //list items
-          let paragraph = document.createElement('p')
-          paragraph.setAttribute('class', 'text-white d-flex flex-row justify-content-center align-text-center')
-          let text = document.createTextNode(username)
-          paragraph.appendChild(text)
-          let board_container = document.createElement('div')
-          board_container.setAttribute('id', 'board-container')
-          let checker = document.createElement('div')
-          checker.setAttribute('class', 'pb-2')
-          checker.setAttribute('id',`checkerboard_${count}`)
-          checker.setAttribute('style', 'display: grid; grid-template-columns: repeat(5, 1fr); grid-gap: 5px; padding: 10px; box-sizing: border-box; float:right ;')
-          //append all the list elements
-          newBoard.appendChild(paragraph)
-          newBoard.appendChild(board_container)
-          newBoard.appendChild(checker)
-          //append new list element to the list
-          list.appendChild(newBoard)
-
-
-          const gameBoard= document.getElementById(`checkerboard_${count}`);
-
-          for (let i=30; i<60; i++){
-              let square = document.createElement("div");
-              square.classList.add("square");
-              square.setAttribute("id", i+1);
-              gameBoard.appendChild(square);
-          }
-          sessionStorage.setItem('count', ++count)
-        }
 
     </script>
   </div>
