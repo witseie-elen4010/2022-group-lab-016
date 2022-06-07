@@ -157,5 +157,3 @@ document.addEventListener('keydown', function (event) {
   getButton(event.key);
 });
 
-
-
