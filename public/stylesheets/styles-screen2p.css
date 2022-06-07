@@ -46,15 +46,6 @@
     float: left;
   }
   
-  #checkerboard_2 {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 5px;
-    padding: 10px;
-    box-sizing: border-box;
-    float:right ;
-  }
-  
   .square {
     border: 2px solid rgb(58, 58, 59);
     min-width: 60px;
@@ -169,17 +160,12 @@
 
 #userDetails{
   position: absolute;
-  top: 50px;
+  top: 25px;
+  left: 74%;
 }
 #userDetails >label{
   color: #22181C;
   border-radius: 5px;
-}
-
-#invitePlayers{
-  position: absolute;
-  top: 50px;
-  left: 55%;
 }
 
 #invitePlayers >label{
@@ -254,6 +240,62 @@ body.night #userDetails >label {
 body.night .btn-close{
   background-color: white;
 }
+
+#invitePlayers_{
+  position: relative;
+  left: 10%;
+}
+
+#invitePlayers_ >label{
+  color: white;
+}
+
+#invitePlayers_ >button, input{
+  border-radius: 5px;
+}
+
+#inviteButton{
+  position: relative;
+  left: 16%;
+}
+#inviteButton:hover{
+  background-color: green;
+}
+
+#invitePlayer_{
+  position: relative;
+  left: 5%;
+}
+
+#invitePlayer_ >label{
+  color: white;
+}
+
+#declineButton{
+  position: relative;
+  left: 34%;
+}
+
+#declineButton:hover{
+  background-color: red;
+}
+
+#allPlayers{
+  position: absolute;
+  left: 5px;
+  top: 60px;
+}
+
+#leaveButton{
+  position: relative;
+  left: 2%;
+  border-radius: 5px;
+}
+
+#leaveButton:hover{
+  background-color: yellow;
+}
+
 .countdown {
   display: flex;
 }
@@ -264,4 +306,40 @@ body.night .btn-close{
   align-items: center;
   justify-content: center;
   margin: 10px;
+}
+
+#square{
+  visibility: hidden;
+  width: 400px;
+  height: 400px;
+  background-color: black;
+}
+
+.graph-container{
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.graph-container .graph {
+  width: 100%;
+  height: 100%;
+  padding-left: 4px;
+}
+.graph-container .graph .graph-bar {
+  height: 100%;
+  width: 0%;
+  position: relative;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+}
+.graph-container .graph .num-guess {
+  font-weight: bold;
+  color: white;
+  justify-content: center;
+
 }
