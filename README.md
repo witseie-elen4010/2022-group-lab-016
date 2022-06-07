@@ -11,3 +11,6 @@ A group project based on the game, Wordle.
 * Tirivashe Maredza
 * Brian Nkundhlande
 * Karabo Kgatla
+
+# Website
+- http://wordleeeee.azurewebsites.net/
