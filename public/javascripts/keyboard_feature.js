@@ -10,6 +10,7 @@ const GUESSES = 6;
 let guesses_left = GUESSES;
 let game_over = false;
 let myscreenColor = [];
+let wins = false;
 //toastr
 toastr.options = {
   "closeButton": true,
@@ -70,6 +71,8 @@ const get_element_function = function (value) {
   // Winning or losing game
   if (guess_word === correctWord) {
     toastr.success("You guessed Correctly! Game Over!");
+    update_score(guesses_left);
+    wins = true;
     game_over = true;
     return;
   } else{
@@ -157,3 +160,121 @@ document.addEventListener('keydown', function (event) {
   getButton(event.key);
 });
 
+let print_score= function(){
+  const guess_1 = document.getElementById('guess-1');
+  const guess_2 = document.getElementById('guess-2');
+  const guess_3 = document.getElementById('guess-3');
+  const guess_4 = document.getElementById('guess-4');
+  const guess_5 = document.getElementById('guess-5');
+  const guess_6 = document.getElementById('guess-6');
+
+  guess_1.innerHTML = Number(localStorage.getItem('bar-1'));
+  guess_2.innerHTML = Number(localStorage.getItem('bar-2'));
+  guess_3.innerHTML = Number(localStorage.getItem('bar-3'));
+  guess_4.innerHTML = Number(localStorage.getItem('bar-4'));
+  guess_5.innerHTML = Number(localStorage.getItem('bar-5'));
+  guess_6.innerHTML = Number(localStorage.getItem('bar-6'));
+}
+
+let update_score= function(element){
+
+ if(element==6){
+  var scored = Number(localStorage.getItem('bar-1'));
+  localStorage.setItem('bar-1',++scored);
+ }else if(element==5){
+  var scored = Number(localStorage.getItem('bar-2'));
+   localStorage.setItem('bar-2',++scored);  
+ }else if(element==4){
+  var scored = Number(localStorage.getItem('bar-3'));
+   localStorage.setItem('bar-3',++scored);  
+ }else if(element==3){
+  var scored = Number(localStorage.getItem('bar-4'));
+   localStorage.setItem('bar-4',++scored);  
+ }else if(element==2){
+  var scored = Number(localStorage.getItem('bar-5'));
+   localStorage.setItem('bar-5',++scored); 
+ }else if(element==1){
+  var scored = Number(localStorage.getItem('bar-6'));
+   localStorage.setItem('bar-6',++scored); 
+ }
+}
+
+let guess_distro = function(){
+  const arr = [];
+  for (let i = 0; i < 6; i++){
+   arr[i] = Number(localStorage.getItem(`bar-${i+1}`));
+  }
+   console.log(arr);
+  let max = Math.max(...arr);
+  for (let i = 0; i < GUESSES; i++) {
+    let len = (arr[i]/max)*100;
+   // console.log(len);
+    if (len > 7){
+      if (len == 100){
+        document.getElementById(`bar-${i+1}`).style.width = `${len}%`;
+        document.getElementById(`bar-${i+1}`).style.backgroundColor = 'green';
+      }else{
+       document.getElementById(`bar-${i+1}`).style.width = `${len}%`;
+      }
+    }else{
+     document.getElementById(`bar-${i+1}`).style.width = '7%'
+    }
+  }
+  return;
+}
+const statistics = function(element){
+  const winner = document.getElementById('win');
+  const played = document.getElementById('played');
+  const curr_streak = document.getElementById('streak');
+  const max = document.getElementById('max');
+  const reset = 0;
+  var win = Number(localStorage.getItem('wins'));
+  var streak = Number(localStorage.getItem('streak'));
+  var loss = Number(localStorage.getItem('loss'));
+  //console.log(win,streak,loss);
+  if(element){
+    localStorage.setItem('wins',++win);
+    localStorage.setItem('streak',++streak);
+  }else{
+    localStorage.setItem('streak',reset)
+    localStorage.setItem('loss',++loss);
+    }
+  if (Number(localStorage.getItem('max'))<streak){
+    localStorage.setItem('max',streak);
+  }
+//  console.log(win,streak,loss);
+  let total = win + loss;
+ // console.log(total);
+  played.innerHTML = `${total}`;
+  winner.innerHTML = `${(win/total)*100}`;
+  curr_streak.innerHTML = `${streak}`;
+  max.innerHTML = localStorage.getItem('max');
+
+}
+
+const stats_init= function(){
+  const winner = document.getElementById('win');
+  const played = document.getElementById('played');
+  const curr_streak = document.getElementById('streak');
+  const max = document.getElementById('max');
+  played.innerHTML = `${Number(localStorage.getItem('loss'))+Number(localStorage.getItem('wins'))}`;
+  winner.innerHTML = `${(Number(localStorage.getItem('wins'))/(Number(localStorage.getItem('loss'))+Number(localStorage.getItem('wins'))))*100}`;
+  curr_streak.innerHTML = localStorage.getItem('max');
+  max.innerHTML = localStorage.getItem('max');
+  return;
+}
+
+document.addEventListener('keyup',(e)=>{
+  if (game_over) {
+    statistics(wins);
+    print_score();
+    guess_distro();
+    return;
+  }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  stats_init();
+  print_score();
+  guess_distro();
+})

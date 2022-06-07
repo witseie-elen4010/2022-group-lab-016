@@ -10,6 +10,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="/javascripts/screen2p.js"></script>
+  <script src="/javascripts/statistics-multiplayer.js"></script>
 
   <script defer src="/javascripts/keyboard_feature.js"></script>
   <script defer src="/javascripts/multiplayer_screen_dynamics.js"></script>
@@ -157,28 +158,79 @@
           <header class=" d-flex flex-row justify-content-around fw-bold">STATISTICS</header>
           <main class="d-flex flex-row justify-content-around">
             <section class="px-2">
-              <div class="d-flex flex-row justify-content-around">0</div>
+              <div class="d-flex flex-row justify-content-around" id="playedp">0</div>
               <div class="d-flex flex-row justify-content-around">Played</div>
             </section>
             <section class="">
-              <div class="d-flex flex-row justify-content-around">0</div>
+              <div class="d-flex flex-row justify-content-around" id="winp">0</div>
               <div class="d-flex flex-row justify-content-around">Win %</div>
             </section>
             <section class="">
-              <div class="d-flex flex-row justify-content-around">0</div>
+              <div class="d-flex flex-row justify-content-around" id="streakp">0</div>
               <div>
                 <div class="d-flex flex-row justify-content-around"> Current</div>
                 <div class="d-flex flex-row justify-content-around">Streak</div>
               </div>
             </section>
             <section>
-              <div class="d-flex flex-row justify-content-around">0</div>
+              <div class="d-flex flex-row justify-content-around" id="maxp">0</div>
               <div>
-                <div class="d-flex flex-row justify-content-around">Max</div>
+                <div class="d-flex flex-row justify-content-around" >Max</div>
                 <div class="d-flex flex-row justify-content-around">Streak</div>
               </div>
-            </section>
+            </section>            
           </main>
+          <h4>guess distribution</h4>
+          <div id="guess-distribution">
+            <div class="graph-container">
+              <div class="guess">1 </div>
+              <div class="graph">
+                <div class="graph-bar" style="width: 7%" id="bar-1p">
+                  <div class="num-guess" id="guess-1p">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="graph-container">
+              <div class="guess">2 </div>
+              <div class="graph">
+                <div class="graph-bar" style="width: 7%" id="bar-2p">
+                  <div class="num-guess" id="guess-2p">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="graph-container">
+              <div class="guess">3 </div>
+              <div class="graph">
+                <div class="graph-bar" style="width: 7%" id="bar-3p">
+                  <div class="num-guess" id="guess-3p">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="graph-container">
+              <div class="guess">4 </div>
+              <div class="graph">
+                <div class="graph-bar" style="width: 7%" id="bar-4p">
+                  <div class="num-guess" id="guess-4p">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="graph-container">
+              <div class="guess">5 </div>
+              <div class="graph">
+                <div class="graph-bar" style="width: 7%" id = "bar-5p">
+                  <div class="num-guess" id="guess-5p">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="graph-container">
+              <div class="guess">6 </div>
+              <div class="graph">
+                <div class="graph-bar" style="width: 7%" id="bar-6p">
+                  <div class="num-guess" id="guess-6p">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div><h3>Next WORDLE in</h3></div>
           <div class="countdown" id="countdown">
             <div class="time"><h2  id="timer">00</h2></div>
