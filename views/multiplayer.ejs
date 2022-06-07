@@ -30,6 +30,9 @@
   <div id='pop_message'>
     <div id='pop'></div>
   </div>
+  <div id = 'userDetails'>
+    <br><label>username</label><input type="text" id = 'user' readonly>
+  </div>
 
   <header class="d-flex justify-content-between mb-0">
 
@@ -264,48 +267,185 @@
   <!--multiplayer mode socket implementation, the code for the user details allows the socket to 
    identify the user. This is also stored into the local memory so that it wont get lost when a page is
    refreshed however, a database should be able to provide this information-->
+  <section id = 'allPlayers'>
+    <div id = 'invitePlayers'>
+      <label for="player1">add player</label><input type="text" id = 'player'> <button id = 'addButton'>submit</button> 
+    </div>
+    <br>
+    <div id = 'invitePlayers_'>
+      <label for="invites">invites</label><input type="text" id = 'invites' readonly>
+      <br> <br>
+      <button id = 'inviteButton'>Accept</button><button id = 'declineButton'>Clear Invite</button> 
+    </div>
+    <br>
+    <div id = 'invitePlayer_'>
+      <label for="gp">groupId</label><input type="text" id = 'gId' readonly><button id = 'leaveButton'>Leave</button> 
+    </div>
 
+  </section>
+   
   <div>
+    
     <script>
         let users_added = []
+
+        document.getElementById('invites').value = ''
+        document.getElementById('gId').value = ''
+        document.getElementById('player').value = ''
+
+
         let count = 0;
+
         const socket = io('http://localhost:3000');
         
         socket.on('connection');
-
+        // sends data to the opponent, i.e this is what the oppenent gets
         socket.on('message', (data) =>{
             updateOpponentScreen(data);
         })
 
-        const sendMessage = function(msg){
-            let username = document.querySelector('#user').value;
-            socket.emit('message', [username, msg, 'username']);
-        }
-
-        document.getElementById('subBut').addEventListener('click', ()=>{
-            let username = document.querySelector('#username').value;
-            localStorage.setItem('username', username);
+        socket.on('update', (data) => {
+            localStorage.setItem('id', data)
         })
 
+        socket.on('invite', (data) =>{
+          document.getElementById('invites').value = data[0]
+          document.getElementById('gId').value = data[1]
+
+          alert('You have been Invited to a battle by ' + data[0] + 
+          ', if you are afraid then decline  else accept the challenge. Dont forget to refresh your browser')
+        })
+
+        socket.on('join', (data)=>{
+          users_added = data[1];
+          alert('Finally, ' + data[0] + data[2])
+        })
+
+        let removeParticipant = function(participant){
+          const index = users_added.indexOf(participant);
+          let first_half = users_added.slice(0, index);
+          let second_half = users_added.slice(index + 1, users_added.length);
+          users_added.length = 0;
+          if(first_half.length !== 0){
+            users_added = users_added.concat(first_half);
+          }
+          if(first_half.length !== 0){
+            users_added = users_added.concat(second_half);
+          }
+        }
+
+        socket.on('leave', (data)=>{
+          alert('Attention, ' + data + ' left  the game')
+          removeParticipant(data)
+        })
+
+        socket.on('decline', (data) =>{
+          alert('The request to invite ' + data + ' has been declined')
+        })
+
+        socket.on('userNotFound', (data) =>{
+          alert('The username ' + data + ' does not exist')
+        })
+
+        socket.on('hostLeft', (data) =>{
+          alert('Unfortunately, the host ' + data[0] + ' has left the game, ' + data[1] +
+          ' will be the new host');
+          removeParticipant(data[0]);
+        })
+
+        socket.on('hostMsg', (data) =>{
+          alert('You have left the game!')
+          users_added.length = 0;
+        })
+
+        socket.on('userNotConnected', (data) =>{
+          let decision = confirm(data[0] + ' is currently unavailable, ' + 
+          'do you want to send an email for a match later?')
+          if(decision){
+            // send an email
+          }
+        })
+
+        socket.on('resetId', (data) =>{
+          localStorage.setItem('id', data);
+        })
+
+        const sendMessage = function(msg){
+            let username = localStorage.getItem('username');
+            let id = localStorage.getItem('id');
+            socket.emit('message', [username, id, msg]);
+        }
+
+        // gets the local storage
         if(localStorage.getItem('username') !== null){
             document.querySelector('#user').value = localStorage.getItem('username');
         }
 
+        // renews the username whenever the page is refreshed
         document.addEventListener('DOMContentLoaded', ()=>{
-            let username = document.querySelector('#user').value;
-            socket.emit('message', [username, 'startingWeb', 'username']);
+            let username = localStorage.getItem('username');
+            socket.emit('update', username);
         })
 
+        document.getElementById('declineButton').addEventListener('click', ()=>{
+          let id = document.getElementById('gId').value;
+          let username = localStorage.getItem('username');
+          let id_ = localStorage.getItem('id');
+          if(document.getElementById('invites').value.length === 0){
+             alert('You currently have no invite to decline :) ')
+          }
+          else {
+            document.getElementById('invites').value = '';
+            document.getElementById('gId').value = '';
+            socket.emit('decline', [username, id, id_]);
+          }
+        })
+
+        // whenever someone asks me for an invitation
+        document.getElementById('inviteButton').addEventListener('click', ()=>{
+
+          let username = localStorage.getItem('username');
+          let id_ = localStorage.getItem('id');
+
+          if(users_added.length === 0){
+            let id = document.getElementById('gId').value;
+            localStorage.setItem('id', id)
+            let username_ = document.getElementById('invites').value;
+            document.getElementById('invites').value = '';
+            document.getElementById('gId').value = '';
+            if(username_.length !== 0){
+               socket.emit('join', [username, username_, id]);
+            }
+            else{
+              alert('Kindly wait for an invite')
+            }
+          }else{
+            alert('Please leave your current group before accepting other invites')
+          }
+        })
+
+        // whenever I want to invite someone 
         document.getElementById('addButton').addEventListener('click', ()=>{
           const user_added = document.getElementById('player').value;
-          let username = document.querySelector('#user').value;
-          if(!(users_added.includes(user_added) || user_added === '' || user_added === undefined)){
-            socket.emit('message', [username, 'startingWeb', user_added]);
+          let username = localStorage.getItem('username');
+          let id = localStorage.getItem('id');
+
+          if(document.getElementById('invites').value.length !== 0){
+            alert('Please reject the invite before inviting someone')
+          } 
+          else if(!(users_added.includes(user_added) || user_added === '' || user_added === undefined || username === user_added)){
+            socket.emit('invite', [user_added, username, id]);
           }
           else{
             alert('The user is already in or is undefined')
           }
-          users_added.push(user_added);
+        })
+
+        document.getElementById('leaveButton').addEventListener('click', ()=>{
+            let username = localStorage.getItem('username');
+            let id = localStorage.getItem('id');
+            users_added.length = 0;
+            socket.emit('leave', [username, id]);
         })
 
         function addBoard(username, count){
