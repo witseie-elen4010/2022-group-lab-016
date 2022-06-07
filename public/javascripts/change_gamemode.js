@@ -6,11 +6,11 @@ document.getElementById('switchMode').addEventListener('click', () =>{
     const select_mode = SELECT.options[SELECT.selectedIndex].value;
     let url = '';
     if(select_mode === 'MultiPlayerMode'){
-         url = 'http://localhost:3000/multiplayer';
+         url = 'https://wordleeeee.azurewebsites.net/multiplayer';
         window.open(url, '_self'); 
     }
     else if(select_mode === 'SinglePlayerMode'){
-        url = 'http://localhost:3000/screen';
+        url = 'https://wordleeeee.azurewebsites.net/screen';
         window.open(url, '_self');
     }
   }
