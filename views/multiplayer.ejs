@@ -30,9 +30,6 @@
   <div id='pop_message'>
     <div id='pop'></div>
   </div>
-  <div id = 'userDetails'>
-    <br><label>username</label><input type="text" id = 'user' readonly>
-  </div>
 
   <header class="d-flex justify-content-between mb-0">
 
@@ -50,7 +47,7 @@
         data-bs-toggle="modal" data-bs-target="#StatsModal"></button>
         <button type="button" class="btn bi bi-gear-fill p-0 pe-2" name="menu" id="Icon" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvastheme" aria-controls="offcanvastheme" style="font-size: 1.4rem;"></button>
-        <button type="button" class="btn bi bi-person-plus-fill p-0 pe-2" name="add-player" id="Icon" 
+        <button type="button" onclick="addBoard('Njabulo')" class="btn bi bi-person-plus-fill p-0 pe-2" name="add-player" id="Icon" 
         style="font-size: 1.4rem;" data-bs-toggle="modal" data-bs-target="#AddPlayerModal"></button>    
       </section>
 
@@ -264,27 +261,7 @@
     </div>
   </main>
 
-  <!--multiplayer mode socket implementation, the code for the user details allows the socket to 
-   identify the user. This is also stored into the local memory so that it wont get lost when a page is
-   refreshed however, a database should be able to provide this information-->
-  <section id = 'allPlayers'>
-    <div id = 'invitePlayers'>
-      <label for="player1">add player</label><input type="text" id = 'player'> <button id = 'addButton'>submit</button> 
-    </div>
-    <br>
-    <div id = 'invitePlayers_'>
-      <label for="invites">invites</label><input type="text" id = 'invites' readonly>
-      <br> <br>
-      <button id = 'inviteButton'>Accept</button><button id = 'declineButton'>Clear Invite</button> 
-    </div>
-    <br>
-    <div id = 'invitePlayer_'>
-      <label for="gp">groupId</label><input type="text" id = 'gId' readonly><button id = 'leaveButton'>Leave</button> 
-    </div>
 
-  </section>
-   
-  <div>
     
     <script>
         let users_added = []
@@ -292,9 +269,7 @@
         document.getElementById('invites').value = ''
         document.getElementById('gId').value = ''
         document.getElementById('player').value = ''
-
-
-        let count = 0;
+        
 
         const socket = io('http://localhost:3000');
         
@@ -448,7 +423,8 @@
             socket.emit('leave', [username, id]);
         })
 
-        function addBoard(username, count){
+        function addBoard(username){
+          let count = Number(sessionStorage.getItem('count'))
           const list = document.getElementById('boardList')
           //item to add to the list
           let newBoard = document.createElement('li')
@@ -462,13 +438,25 @@
           board_container.setAttribute('id', 'board-container')
           let checker = document.createElement('div')
           checker.setAttribute('class', 'pb-2')
-          checker.setAttribute('id',`checker_board_${count}`)
+          checker.setAttribute('id',`checkerboard_${count}`)
+          checker.setAttribute('style', 'display: grid; grid-template-columns: repeat(5, 1fr); grid-gap: 5px; padding: 10px; box-sizing: border-box; float:right ;')
           //append all the list elements
           newBoard.appendChild(paragraph)
           newBoard.appendChild(board_container)
           newBoard.appendChild(checker)
           //append new list element to the list
           list.appendChild(newBoard)
+
+
+          const gameBoard= document.getElementById(`checkerboard_${count}`);
+
+          for (let i=30; i<60; i++){
+              let square = document.createElement("div");
+              square.classList.add("square");
+              square.setAttribute("id", i+1);
+              gameBoard.appendChild(square);
+          }
+          sessionStorage.setItem('count', ++count)
         }
 
     </script>
