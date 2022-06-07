@@ -22,6 +22,11 @@ async function login(event) {
     console.log('Got the token: ', result.data)
     localStorage.setItem('token', result.data)
     window.location.href = "/screen";
+    //check if remeber me checkbox is checked
+    const cb = document.getElementById('remember-me')
+    if(cb.checked === true){
+      //create cookies
+    }
   } else {
     alert(result.error)
   }
