@@ -198,3 +198,30 @@ body.night .btn-close{
   justify-content: center;
   margin: 10px;
 }
+.graph-container {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.graph-container .graph {
+  width: 100%;
+  height: 100%;
+  padding-left: 4px;
+}
+.graph-container .graph .graph-bar {
+  height: 100%;
+  width: 0%;
+  position: relative;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+}
+.graph-container .graph .num-guess {
+  font-weight: bold;
+  color: white;
+  justify-content: center;
+}
