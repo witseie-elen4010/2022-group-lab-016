@@ -259,7 +259,6 @@
   <div>
     
     <script>
-
         let users_added = []
 
         document.getElementById('invites').value = ''
@@ -283,7 +282,7 @@
           document.getElementById('gId').value = data[1]
 
           alert('You have been Invited to a battle by ' + data[0] + 
-          ', if you are afraid then decline  else accept the challenge')
+          ', if you are afraid then decline  else accept the challenge. Dont forget to refresh your browser')
         })
 
         socket.on('join', (data)=>{
@@ -291,12 +290,53 @@
           alert('Finally, ' + data[0] + data[2])
         })
 
+        let removeParticipant = function(participant){
+          const index = users_added.indexOf(participant);
+          let first_half = users_added.slice(0, index);
+          let second_half = users_added.slice(index + 1, users_added.length);
+          users_added.length = 0;
+          if(first_half.length !== 0){
+            users_added = users_added.concat(first_half);
+          }
+          if(first_half.length !== 0){
+            users_added = users_added.concat(second_half);
+          }
+        }
+
         socket.on('leave', (data)=>{
-          alert('Attention, ' + data + ' left  the challenge')
+          alert('Attention, ' + data + ' left  the game')
+          removeParticipant(data)
         })
 
         socket.on('decline', (data) =>{
           alert('The request to invite ' + data + ' has been declined')
+        })
+
+        socket.on('userNotFound', (data) =>{
+          alert('The username ' + data + ' does not exist')
+        })
+
+        socket.on('hostLeft', (data) =>{
+          alert('Unfortunately, the host ' + data[0] + ' has left the game, ' + data[1] +
+          ' will be the new host');
+          removeParticipant(data[0]);
+        })
+
+        socket.on('hostMsg', (data) =>{
+          alert('You have left the game!')
+          users_added.length = 0;
+        })
+
+        socket.on('userNotConnected', (data) =>{
+          let decision = confirm(data[0] + ' is currently unavailable, ' + 
+          'do you want to send an email for a match later?')
+          if(decision){
+            // send an email
+          }
+        })
+
+        socket.on('resetId', (data) =>{
+          localStorage.setItem('id', data);
         })
 
         const sendMessage = function(msg){
@@ -320,10 +360,14 @@
           let id = document.getElementById('gId').value;
           let username = localStorage.getItem('username');
           let id_ = localStorage.getItem('id');
-          document.getElementById('invites').value = '';
-          document.getElementById('gId').value = '';
-
-          socket.emit('decline', [username, id, id_]);
+          if(document.getElementById('invites').value.length === 0){
+             alert('You currently have no invite to decline :) ')
+          }
+          else {
+            document.getElementById('invites').value = '';
+            document.getElementById('gId').value = '';
+            socket.emit('decline', [username, id, id_]);
+          }
         })
 
         // whenever someone asks me for an invitation
@@ -332,10 +376,12 @@
           let username = localStorage.getItem('username');
           let id_ = localStorage.getItem('id');
 
-          if(id_ === -1){
+          if(users_added.length === 0){
             let id = document.getElementById('gId').value;
             localStorage.setItem('id', id)
             let username_ = document.getElementById('invites').value;
+            document.getElementById('invites').value = '';
+            document.getElementById('gId').value = '';
             if(username_.length !== 0){
                socket.emit('join', [username, username_, id]);
             }
@@ -345,8 +391,6 @@
           }else{
             alert('Please leave your current group before accepting other invites')
           }
-          
-          
         })
 
         // whenever I want to invite someone 
@@ -367,11 +411,10 @@
         })
 
         document.getElementById('leaveButton').addEventListener('click', ()=>{
-          let username = localStorage.getItem('username');
-          let id = localStorage.getItem('id');
-          socket.emit('leave', [username, id]);
-          localStorage.setItem('id', -1)
-          users_added.length = 0;
+            let username = localStorage.getItem('username');
+            let id = localStorage.getItem('id');
+            users_added.length = 0;
+            socket.emit('leave', [username, id]);
         })
 
     </script>

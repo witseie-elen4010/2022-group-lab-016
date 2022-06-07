@@ -35,9 +35,16 @@ const io = require('socket.io')( server, { cors: { origin: '*'}})
 
 // the username of this player should be obtained from the database since he/she is the user of the web page
 let UsersConnectedToserver = []
-
 let addedUsers = [];
-
+let userIDs = [];
+let playersFromTheDatabase = [
+  'bree',
+  'courage',
+  'cor',
+  'yyy',
+  'thando',
+  'software3'
+];
 app.use(express.static(__dirname + '/public'))
 
 app.set('view engine', 'ejs')
@@ -49,12 +56,6 @@ app.get('/multiplayer', (req, res)=>{
 server.listen(port, () =>{
     console.log('running.....')
 })
-
-let users = require('./public/javascripts/index')
-
-let userIDs = [];
-let i = 0;
-let ID = -1
 
 const checkAddedUsers = function(listOfUsers, username, userId){
   let result = false;
@@ -85,7 +86,6 @@ io.on('connection', (socket)=>{
 
          if(checkAddedUsers(addedUsers, data[0], data[1]))
           if(String(addedUsers[i].name) !== String(data[0]) && String(addedUsers[i].id) === String(data[1])){
-            console.log('inside: ' + UsersConnectedToserver[i])
              io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('message', data[2]);
           }
       }
@@ -107,12 +107,17 @@ io.on('connection', (socket)=>{
     socket.on('join', (data) =>{
 
       let usersInTheGroup = []
+
       if(!UsersConnectedToserver.includes(data[0])){
         UsersConnectedToserver.push(data[0]);
       }
 
-      if(!checkAddedUsers(addedUsers, data[0], UsersConnectedToserver.indexOf(data[1]))){
-        addedUsers.push({name: data[0], id: UsersConnectedToserver.indexOf(data[1])});
+      if(!checkAddedUsers(addedUsers, data[1], data[2])){
+        addedUsers.push({name: data[1], id: data[2]})
+      }
+
+      if(!checkAddedUsers(addedUsers, data[0], data[2])){
+        addedUsers.push({name: data[0], id: data[2]});
         for(let i = 0; i < addedUsers.length; i++){
           if(String(addedUsers[i].id) === String(data[2])) usersInTheGroup.push(String(addedUsers[i].name));
         }
@@ -131,25 +136,59 @@ io.on('connection', (socket)=>{
 
     // this should let someone know whenever they get an invite// data[1] is the person inviting
     socket.on('invite', (data) =>{
-      if(UsersConnectedToserver.includes(data[0]) && !checkAddedUsers(addedUsers, data[0], data[2])){
-        io.to(userIDs[UsersConnectedToserver.indexOf(data[0])]).emit('invite', [data[1], data[2]]);
+      if(playersFromTheDatabase.includes(data[0])){
+
+        if(UsersConnectedToserver.includes(data[0]) && !checkAddedUsers(addedUsers, data[0], data[2])){
+          io.to(userIDs[UsersConnectedToserver.indexOf(data[0])]).emit('invite', [data[1], data[2]]);
+        } 
+        if(!UsersConnectedToserver.includes(data[0])){
+          const email = 'brain.confidence292@gmail.com'
+          io.to(userIDs[UsersConnectedToserver.indexOf(data[1])]).emit('userNotConnected',[data[0], email]);
+        } 
       }
-      if(!checkAddedUsers(addedUsers, data[1], data[2])){
-        addedUsers.push({name: data[1], id: data[2]})
-      }
+      else io.to(userIDs[UsersConnectedToserver.indexOf(data[1])]).emit('userNotFound',data[0]);
     })
 
     // the user should be able to leave the game room
     socket.on('leave', (data) =>{
 
-      if(checkAddedUsers(addedUsers, data[0], data[1])){
+      if(checkAddedUsers(addedUsers, data[0], data[1]) && String(data[1]) === String(UsersConnectedToserver.indexOf(data[0]))){
+        let host_selected = false;
+        let host_name = data[0];
+        let user_ = UsersConnectedToserver.indexOf(data[0]);
+        for(let i = 0; i < addedUsers.length; i++){
+          
+          if(String(addedUsers[i].id) === String(data[1])){
+            
+            if(String(addedUsers[i].name) === String(data[0])){
+              io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('resetId', data[1]);
+              io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('hostMsg');
+              continue;
+            }
+            else if(!host_selected){
+              user_ = UsersConnectedToserver.indexOf(addedUsers[i].name);
+              host_name = addedUsers[i].name;
+              host_selected = true;
+            }
+            io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('hostLeft', [data[0], host_name]);
+            io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('resetId', user_);
+            addedUsers[i].id = user_;
+          }
+       }
+      }
+      else if(checkAddedUsers(addedUsers, data[0], data[1])){
         let index = getIndex(addedUsers ,data[0], data[1]);
         let firstPieceOfUsers = addedUsers.slice(0, index);
         let secondPieceOfUsers = addedUsers.slice(index + 1, addedUsers.length);
+        let user_ = UsersConnectedToserver.indexOf(data[0]);
 
         for(let i = 0; i < addedUsers.length; i++){
-           if(String(addedUsers[i].name) !== String(data[0]) && String(addedUsers[i].id) === String(data[1])){
-            io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('leave', data[0]);
+           if(String(addedUsers[i].id) === String(data[1])){
+             if(String(addedUsers[i].name) === String(data[0])){
+              io.to(userIDs[UsersConnectedToserver.indexOf(data[0])]).emit('resetId', user_);
+              io.to(userIDs[UsersConnectedToserver.indexOf(data[0])]).emit('leave', data[0]);
+             }
+            else io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('leave', data[0]);
            }
         }
         addedUsers.length = 0;
@@ -164,13 +203,19 @@ io.on('connection', (socket)=>{
       }
     });
 
+    // if the invite has been declined
     socket.on('decline', (data) =>{
-      for(let i = 0; i < addedUsers.length; i++){
-        if(!checkAddedUsers(addedUsers, data[0], data[2]))
-        if(String(addedUsers[i].name) !== String(data[0]) && String(addedUsers[i].id) === String(data[1])){
-          io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('decline', data[0]);
-        }
-     }
+      
+      if(!checkAddedUsers(addedUsers, data[0], data[2])){
+        let monitor_ = false;
+        for(let i = 0; i < addedUsers.length; i++){
+          if(String(addedUsers[i].name) !== String(data[0]) && String(addedUsers[i].id) === String(data[1])){
+            monitor_ = true;
+            io.to(userIDs[UsersConnectedToserver.indexOf(addedUsers[i].name)]).emit('decline', data[0]);
+          }
+       }
+       if(!monitor_) io.to(userIDs[UsersConnectedToserver.indexOf(UsersConnectedToserver[data[1]])]).emit('decline', data[0]);
+      }
     })
 })
 
