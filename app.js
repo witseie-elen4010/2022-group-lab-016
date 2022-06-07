@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path');
 const port = process.env.PORT || 3000
-
+nodeMailer = require('nodemailer') 
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 app.use(express.static(__dirname + '/models'));
@@ -34,6 +34,41 @@ const server = require('http').createServer(app)
 const io = require('socket.io')( server, { cors: { origin: '*'}})
 
 // the username of this player should be obtained from the database since he/she is the user of the web page
+
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.get('/index', function (req, res) {
+  res.render('index');
+});
+app.post('/send-email', function (req, res) {
+  let transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'itchiraira@gmail.com',
+      pass: 'dwty fijt wyqs ufle'
+    }
+  });
+  let mailOptions = {
+    from: '"worldlegroup16" <xx@gmail.com>', // sender address
+    to: req.body.to, // list of receivers
+    subject: req.body.subject, // Subject line
+    text: req.body.body, // plain text body
+    html: '<b>Invitation to play</b>' // html body
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    // console.log('Message %s sent: %s', info.messageId, info.response);
+    res.render('multiplayer');
+  });
+});
+
 let UsersConnectedToserver = []
 let addedUsers = [];
 let userIDs = [];
@@ -142,8 +177,7 @@ io.on('connection', (socket)=>{
           io.to(userIDs[UsersConnectedToserver.indexOf(data[0])]).emit('invite', [data[1], data[2]]);
         } 
         if(!UsersConnectedToserver.includes(data[0])){
-          const email = 'brain.confidence292@gmail.com'
-          io.to(userIDs[UsersConnectedToserver.indexOf(data[1])]).emit('userNotConnected',[data[0], email]);
+          io.to(userIDs[UsersConnectedToserver.indexOf(data[1])]).emit('userNotConnected',data[0]);
         } 
       }
       else io.to(userIDs[UsersConnectedToserver.indexOf(data[1])]).emit('userNotFound',data[0]);

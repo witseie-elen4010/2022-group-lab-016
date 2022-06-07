@@ -254,6 +254,44 @@
         <div class="modal-body">
           <main class="d-flex flex-row justify-content-around">
 
+            <div class="container">
+              <form class=" d-flex flex-column" action="/send-email" method="post">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <p>Email</p> <input style="width: 300px; position: absolute; left: 100px; top: 12px; " type="email" class="form-control" name="to">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="form-group col-md-4">
+                    <button style = "position: absolute; left: 410px; top: 12px;" type="submit" class="btn btn-success">Send</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div id = "addPlayer" style = "position: absolute; left: 19px; top: 55px;">
+              <label for="player1">add player</label><input type="text" style="height: 40px; width: 300px;" id = 'player'> <button style="height: 40px; border-radius: 5px;" id = 'addButton'>submit</button> 
+            </div>
+
+            <div id = "addPlayer" style = "position: absolute; left: 50px; top: 150px;">
+              <label style="height: 40px;" for="invites">Invites</label><input type="text" style="height: 40px; width: 360px;  border-radius: 5px;" id = 'invites' readonly>
+            </div>
+
+            <div id = "acceptInvite" style = "position: absolute; left: 50px; top: 200px;">
+              <button id = 'inviteButton' style="position: relative; left: 36%; top: 20%;  border-radius: 5px;">Accept</button><button style="position: relative; left: 180%; top: 20%;  border-radius: 5px;" id = 'declineButton'>Clear Invite</button> 
+            </div>
+
+            <div id = 'roomId' style = "position: absolute; left: 40px; top: 280px;">
+              <label for="gp">groupId</label><input type="text" style="height: 40px; width: 150px; border-radius: 5px;" id = 'gId' readonly><button style="height: 40px;  border-radius: 5px;" id = 'leaveButton'>Leave</button> 
+            </div>
+
+            <div id = 'PUsername' style = "position: absolute; left: 40px; top: 380px;">
+              <label>username</label><input style="height: 40px; width: 150px; border-radius: 5px;" type="text" id = 'user' readonly>
+            </div>
+           
+            <div id = "square"> </div>
+
           </main>
         </div>
         <div class="modal-footer">
@@ -386,11 +424,7 @@
         })
 
         socket.on('userNotConnected', (data) =>{
-          let decision = confirm(data[0] + ' is currently unavailable, ' + 
-          'do you want to send an email for a match later?')
-          if(decision){
-            // send an email
-          }
+          alert(data + ' is currently unavailable, ' + 'try sending an email to play later');
         })
 
         socket.on('resetId', (data) =>{

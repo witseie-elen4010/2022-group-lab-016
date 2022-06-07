@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "start": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "ejs": "^3.1.8",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.5",
+    "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "socket.io": "^4.5.1"
   }
