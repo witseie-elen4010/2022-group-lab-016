@@ -242,6 +242,13 @@ app.get('/screen', (req, res) => {
   res.sendFile(index);
 });
 
+//player_mode
+app.use(express.static(__dirname + '/public'));
+app.get('/player_mode', (req, res) => {
+  const index = path.join(__dirname, 'views', 'player_mode.html');
+  res.sendFile(index);
+});
+
 //Login
 app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => {

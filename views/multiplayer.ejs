@@ -50,7 +50,9 @@
         data-bs-toggle="modal" data-bs-target="#StatsModal"></button>
         <button type="button" class="btn bi bi-gear-fill p-0 pe-2" name="menu" id="Icon" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvastheme" aria-controls="offcanvastheme" style="font-size: 1.4rem;"></button>
-    </section>
+        <button type="button" class="btn bi bi-person-plus-fill p-0 pe-2" name="add-player" id="Icon" 
+        style="font-size: 1.4rem;" data-bs-toggle="modal" data-bs-target="#AddPlayerModal"></button>    
+      </section>
 
   </header>
   <hr class="p-0 mt-0 me-2" id="primary_color">
@@ -180,6 +182,30 @@
               </div>
             </section>
           </main>
+          <div><h3>Next WORDLE in</h3></div>
+          <div class="countdown" id="countdown">
+            <div class="time"><h2  id="timer">00</h2></div>
+          </div>
+      </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--add player modal-->
+  <div class="modal fade" id="AddPlayerModal" tabindex="-1" aria-labelledby="AddPlayerModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+      <div class="modal-content bg-black text-white ">
+        <div class="modal-header bg-black  d-flex flex-row justify-content-center align-text-center">
+          <p class="text-white mb-0 pb-0">Invite player</p>
+          
+        </div>
+        <div class="modal-body">
+          <main class="d-flex flex-row justify-content-around">
+
+          </main>
         </div>
         <div class="modal-footer">
         </div>
@@ -187,13 +213,16 @@
     </div>
   </div>
   
-  <main class="align-self-center w-50 d-flex flex-column align-items-center pt-5" id="main-content">
-    <div id="board-container">
-      <div class="pb-3" id="checkerboard"></div>
-      <div class="pb-3" id="checkerboard_2"></div>
-    </div>
+  <main class="align-self-center w-75 d-flex flex-column align-items-center pt-4" id="main-content">
+    <ul id="boardList" class="d-flex flex-row justify-content-around list-unstyled">
+      <li class="mx-5 pt-0">
+        <p class="text-white d-flex flex-row justify-content-center align-text-center">You</p>
+        <div id="board-container"></div>
+        <div class="pb-2" id="checkerboard"></div>
+      </li>
+    </ul>
     
-    <div class="pt-4" id="keyboard">
+    <div class="pt-2" id="keyboard">
       <div class="keyboard-row">
 
         <button class="button" name="q">q</button>
@@ -239,7 +268,6 @@
    identify the user. This is also stored into the local memory so that it wont get lost when a page is
    refreshed however, a database should be able to provide this information-->
   <section id = 'allPlayers'>
-
     <div id = 'invitePlayers'>
       <label for="player1">add player</label><input type="text" id = 'player'> <button id = 'addButton'>submit</button> 
     </div>
@@ -264,6 +292,9 @@
         document.getElementById('invites').value = ''
         document.getElementById('gId').value = ''
         document.getElementById('player').value = ''
+
+
+        let count = 0;
 
         const socket = io('http://localhost:3000');
         
@@ -417,6 +448,29 @@
             socket.emit('leave', [username, id]);
         })
 
+        function addBoard(username, count){
+          const list = document.getElementById('boardList')
+          //item to add to the list
+          let newBoard = document.createElement('li')
+          newBoard.setAttribute('class', 'mx-5 pt-0')
+          //list items
+          let paragraph = document.createElement('p')
+          paragraph.setAttribute('class', 'text-white d-flex flex-row justify-content-center align-text-center')
+          let text = document.createTextNode(username)
+          paragraph.appendChild(text)
+          let board_container = document.createElement('div')
+          board_container.setAttribute('id', 'board-container')
+          let checker = document.createElement('div')
+          checker.setAttribute('class', 'pb-2')
+          checker.setAttribute('id',`checker_board_${count}`)
+          //append all the list elements
+          newBoard.appendChild(paragraph)
+          newBoard.appendChild(board_container)
+          newBoard.appendChild(checker)
+          //append new list element to the list
+          list.appendChild(newBoard)
+        }
+
     </script>
   </div>
 
@@ -427,6 +481,7 @@
   <!--Toastr-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="/javascripts/theme.js"></script>
+  <script src="/javascripts/timer.js"></script>
 
 </body>
 
